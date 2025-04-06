@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Condition extends Model
 {
     use HasFactory;
+
+    protected $guarded = [
+        'id',
+    ];
+
+    public function Item()
+    {
+        return $this->hasOne(Item::class);
+    }
 }
