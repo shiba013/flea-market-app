@@ -41,12 +41,12 @@
                             @endif
                         </li>
                         <li class="nav__items">
-                            <form action="" method="get">
+                            <form action="/" method="get">
                                 <input type="submit" value="マイページ" class="mypage__btn">
                             </form>
                         </li>
                         <li class="nav__items">
-                            <form action="" method="get">
+                            <form action="/sell" method="get">
                                 <input type="submit" value="出品" class="sell__btn">
                             </form>
                         </li>
