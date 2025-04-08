@@ -20,4 +20,14 @@ class Controller extends BaseController
     {
         return view('detail');
     }
+
+    public function profile()
+    {
+        return view('mypage/profile');
+    }
+
+    public function email()
+    {
+        return view('auth/verify-email');
+    }
 }

@@ -1,0 +1,51 @@
+.verify-email {
+    margin: 0;
+}
+
+.verify-email__title {
+    margin: 200px auto 80px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+    color: rgba(0, 0, 0, 1);
+}
+
+.verify-email__inner {
+    display: flex;
+    align-items: center;
+    width: 700px;
+    margin: 0px auto;
+}
+
+.verify-email-form {
+    width: 50%;
+}
+
+.verify-email-form__group {
+    width: 680px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 70px;
+    align-items: center;
+}
+
+.verify-email-form__btn {
+    width: 250px;
+    height: 70px;
+    border: 1px solid rgba(0, 0, 0, 1);
+    border-radius: 10px;
+    background-color: rgba(217, 217, 217, 1);
+    color: rgba(0, 0, 0, 1);
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.form__link {
+    text-align: center;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 20px;
+    color: rgba(0, 115, 204, 1);
+}
