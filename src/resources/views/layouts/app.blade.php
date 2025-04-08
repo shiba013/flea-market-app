@@ -35,20 +35,16 @@
                                 <input type="submit" value="ログアウト" class="auth__btn">
                             </form>
                             @else
-                            <form action="/login" method="get">
-                                <input type="submit" value="ログイン" class="auth__btn">
-                            </form>
+                            <a href="/login" class="auth__btn">ログイン</a>
                             @endif
                         </li>
                         <li class="nav__items">
-                            <form action="/" method="get">
-                                <input type="submit" value="マイページ" class="mypage__btn">
-                            </form>
+                            <a href="/" class="mypage__btn">マイページ</a>
                         </li>
                         <li class="nav__items">
-                            <form action="/sell" method="get">
-                                <input type="submit" value="出品" class="sell__btn">
-                            </form>
+                            <button type="submit" class="sell__btn">
+                                <a href="/sell" class="sell__link">出品</a>
+                            </button>
                         </li>
                     </ul>
                 </nav>

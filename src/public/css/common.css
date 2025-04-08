@@ -76,17 +76,25 @@ body {
     background-color: rgba(0, 0, 0, 1);
     color: rgba(255, 255, 255, 1);
     border: none;
+    text-decoration: none;
     cursor: pointer;
     font-size: 24px;
     font-weight: 400;
 }
 
 .sell__btn {
-    width: 90%;
+    width: 80%;
+    height: 50px;
     background-color: rgba(255, 255, 255, 1);
-    color: rgba(0, 0, 0, 1);
     border: none;
+    border-radius: 4px;
+    text-align: center;
     cursor: pointer;
+}
+
+.sell__link {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 1);
     font-size: 24px;
     font-weight: 400;
 }
@@ -102,7 +110,7 @@ body {
 
     .auth__btn,
     .mypage__btn,
-    .sell__btn {
+    .sell__link {
         font-size: 16px;
     }
 }
