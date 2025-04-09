@@ -21,7 +21,7 @@ class CreateItemsTable extends Migration
             $table->unsignedInteger('price');
             $table->text('description');
             $table->string('image');
-            $table->string('brand', 50);
+            $table->string('brand', 50)->nullable();
             $table->boolean('is_sold')->default(false);
             $table->timestamps();
         });
