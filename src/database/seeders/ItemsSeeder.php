@@ -17,7 +17,7 @@ class ItemsSeeder extends Seeder
         DB::table('items')->updateOrInsert([
             [
                 'user_id' => 1,
-                'condition_id' => 2,
+                'condition_id' => 1,
                 'name' => '腕時計',
                 'price' => 15000,
                 'description' => 'スタイリッシュなデザインのメンズ腕時計',
