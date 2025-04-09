@@ -17,3 +17,7 @@ use App\Http\Controllers\Controller;
 Route::get('/', [Controller::class ,'index']);
 Route::get('/item', [Controller::class ,'item']);
 Route::get('/profile', [Controller::class ,'profile']);
+
+Route::middleware('auth')->group(function () {
+    Route::get('/mylist', [Controller::class, 'index']);
+});
