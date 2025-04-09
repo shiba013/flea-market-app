@@ -14,6 +14,15 @@ class CategoryItemSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('category_item')->insert([
+            [
+                'category_id' => 1,
+                'item_id' => 1,
+            ],
+            [
+                'category_id' => 1,
+                'item_id' => 2,
+            ],
+        ]);
     }
 }
