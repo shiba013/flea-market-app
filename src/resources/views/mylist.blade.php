@@ -18,7 +18,7 @@
     </div>
     <div class="items-list">
         <div class="items-list__inner">
-            <form action="" method="get" class="items-form">
+            <form action="/detail" method="get" class="items-form">
                 <button type="submit" class="items__btn">
                     <img src="" alt="">
                     <p class="items__name">商品名</p>

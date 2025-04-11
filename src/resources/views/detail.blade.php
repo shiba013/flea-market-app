@@ -1,99 +1,88 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>ラジオでモーダル切り替え</title>
-    <style>
-        /* ラジオボタン非表示 */
-        input[type="radio"] {
-            display: none;
-        }
+@extends('layouts.app')
 
-        /* モーダル共通スタイル */
-        .modal-wrapper {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-        }
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/detail.css') }}">
+@endsection
 
-        .modal {
-            background: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            min-width: 300px;
-            text-align: center;
-            position: relative;
-            display: none;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.75rem;
-            cursor: pointer;
-        }
-
-        .btn {
-            display: inline-block;
-            margin: 1rem;
-            padding: 0.75rem 1.5rem;
-            background-color: #333;
-            color: white;
-            cursor: pointer;
-            border-radius: 0.5rem;
-        }
-
-        /* 表示切り替え */
-        #modal-recommend:checked ~ .modal-wrapper {
-            display: flex;
-        }
-
-        #modal-recommend:checked ~ .modal-wrapper .recommend-modal {
-            display: block;
-        }
-
-        #modal-mylist:checked ~ .modal-wrapper {
-            display: flex;
-        }
-
-        #modal-mylist:checked ~ .modal-wrapper .mylist-modal {
-            display: block;
-        }
-
-        #modal-close:checked ~ .modal-wrapper {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- ラジオボタン（hidden） -->
-    <input type="radio" name="modal" id="modal-recommend">
-    <input type="radio" name="modal" id="modal-mylist">
-    <input type="radio" name="modal" id="modal-close" checked>
-
-    <!-- ボタン -->
-    <div class="modal-trigger">
-        <label for="modal-recommend" class="btn">おすすめを開く</label>
-        <label for="modal-mylist" class="btn">マイリストを開く</label>
-    </div>
-
-    <!-- モーダル本体 -->
-    <div class="modal-wrapper">
-        <div class="modal recommend-modal">
-            <p>おすすめ商品一覧</p>
-            <label for="modal-close" class="close-btn">×</label>
+@section('content')
+<div class="detail">
+    <div class="detail__inner">
+        <div class="items__img">
+            <img src="" alt="">
         </div>
 
-        <div class="modal mylist-modal">
-            <p>マイリスト商品一覧</p>
-            <label for="modal-close" class="close-btn">×</label>
-        </div>
-    </div>
+        <article class="detail__group">
+            <section class="detail-content">
+                <h1 class="detail-content__name">item name</h1>
+                <p class="detail-content__name-p">item brand</p>
+                <p class="detail-content__price-p">¥
+                    <span class="detail-content__price-span">item price</span>（税込）
+                </p>
+                <table class="review-table">
+                    <tr class="review-table__row">
+                        <th>
+                            <input type="checkbox" name="like" id="like" class="like-btn">
+                            <label for="like">
+                                <img src="{{ asset('icon/star.png') }}" alt="star" class="like-icon">
+                            </label>
+                        </th>
+                        <th>
+                            <input type="checkbox" name="comment" id="comment" class="comment-btn">
+                            <label for="comment">
+                                <img src="{{ asset('icon/speechBub.png') }}" alt="speechBub" class="comment-icon">
+                            </label>
+                        </th>
+                    </tr>
+                    <tr class="review-table__row">
+                        <th class="review-table__data">1</th>
+                        <th class="review-table__data">5</th>
+                    </tr>
+                </table>
+                <div class="order">
+                    <form action="/purchase" method="get">
+                        <input type="submit" value="購入手続きへ" class="order__btn">
+                    </form>
+                </div>
+            </section>
 
-</body>
-</html>
+            <section class="detail-content">
+                <h2 class="detail-content__description">商品説明</h2>
+                <textarea name="description" class="description-area" disabled>item description</textarea>
+            </section>
+
+            <section class="detail-content">
+                <h2 class="detail-content__info">商品の情報</h2>
+                <div class="info">
+                    <h3 class="info__title">カテゴリー</h3>
+                    <p class="category-p">
+                        <span class="category-span">category</span>
+                    </p>
+                    <p class="category-p">
+                        <span class="category-span">id</span>
+                    </p>
+                </div>
+                <div class="info">
+                    <h3 class="info__title">商品の状態</h3>
+                    <p class="condition-p">name</p>
+                </div>
+            </section>
+
+            <section class="detail-content">
+                <h2 class="detail-content__comment">コメント（1）</h2>
+                <div class="comment__user">
+                    <img src="" alt="" class="comment__user-img">
+                    <p class="comment__user-p">user name</p>
+                </div>
+                <textarea name="" class="read__comment" disabled>コメントを表示</textarea>
+
+                <form action="" method="post" class="comment-form">
+                    @csrf
+                    <label for="comment" class="write__comment">商品へのコメント</label>
+                    <textarea name="comment" id="comment" class="write__comment-area" rows="10">ここにコメントを記載</textarea>
+                    <input type="submit" value="コメントを送信する" class="write__comment-btn">
+                </form>
+            </section>
+        </article>
+    </div>
+</div>
+@endsection

@@ -22,7 +22,7 @@
                 <div class="search">
                     <form action="" method="" class="search-form">
                         @csrf
-                        <input type="text" name="keyword" class="search-form__input" placeholder="なにをお探しですか？">
+                        <input type="text" name="keyword" class="search-form__input"placeholder="　なにをお探しですか？">
                     </form>
                 </div>
 
@@ -39,7 +39,7 @@
                             @endif
                         </li>
                         <li class="nav__items">
-                            <a href="/" class="mypage__btn">マイページ</a>
+                            <a href="/mypage" class="mypage__btn">マイページ</a>
                         </li>
                         <li class="nav__items">
                             <button type="submit" class="sell__btn">

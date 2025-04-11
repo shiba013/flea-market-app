@@ -16,8 +16,13 @@ use App\Http\Controllers\Controller;
 
 Route::get('/', [Controller::class ,'index']);
 Route::get('/item', [Controller::class ,'item']);
-Route::get('/profile', [Controller::class ,'profile']);
+Route::get('/detail', [Controller::class ,'detail']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/mylist', [Controller::class, 'index']);
+    Route::get('/mypage', [Controller::class ,'mypage']);
+    Route::get('/mypage/profile', [Controller::class ,'profile']);
+    Route::get('/sell', [Controller::class ,'sell']);
+    Route::get('/purchase', [Controller::class ,'purchase']);
+    Route::get('/purchase/address', [Controller::class ,'address']);
 });
