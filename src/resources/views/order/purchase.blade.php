@@ -23,7 +23,7 @@
                 <select name="pay" id="" class="purchase__select">
                     <option hidden>選択してください</option>
                     {{--@foreach($orders as $order)--}}
-                    <option value=""></option>
+                    <option value="{{-- $order->id --}}">{{-- $order->pay --}}</option>
                     {{--@endforeach--}}
                 </select>
             </div>
