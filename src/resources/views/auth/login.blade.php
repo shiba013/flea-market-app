@@ -29,7 +29,7 @@
                 @csrf
                 <div class="login-form__group">
                     <label for="email" class="login-form__label">メールアドレス</label>
-                    <input type="email" name="email" id="email" class="login-form__input">
+                    <input type="text" name="email" id="email" class="login-form__input">
                     <p class="alert">
                         @error('email')
                         {{ $message }}

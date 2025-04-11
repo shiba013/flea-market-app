@@ -28,7 +28,8 @@
 .edit-form__p {
     font-weight: 700;
     font-size: 36px;
-    margin-right: 120px;
+    margin-right: 80px;
+    padding: 10px;
 }
 
 .edit-form__input {
