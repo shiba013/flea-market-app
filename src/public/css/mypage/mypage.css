@@ -1,0 +1,122 @@
+.content {
+    margin: 0px auto;
+}
+
+.edit-profile {
+    width: 60%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.edit-form {
+    width: 100%;
+}
+
+.edit-form__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-form__img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: rgba(217, 217, 217, 1);
+}
+
+.edit-form__p {
+    font-weight: 700;
+    font-size: 36px;
+    margin-right: 120px;
+}
+
+.edit-form__input {
+    width: 300px;
+    height: 50px;
+    padding: 5px 10px;
+    border: 2px solid rgba(255, 85, 85, 1);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(255, 85, 85, 1);
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.top__title {
+    width: 100%;
+    margin: 50px auto 0px;
+}
+
+.title-list {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    border-bottom: 2px solid rgba(95, 95, 95, 1);
+}
+
+input[type="radio"]:checked+.title__name {
+    color: rgba(255, 0, 0, 1);
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(95, 95, 95, 1);
+}
+
+.title__name {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 2;
+    color: rgba(95, 95, 95, 1);
+}
+
+.title__name:first-of-type {
+    margin-left: 100px;
+}
+
+.items-list {
+    margin: 0px auto;
+    padding: 50px;
+    max-width: 1540px;
+}
+
+.items-list__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.items-form {
+    width: 290px;
+    height: 320px;
+}
+
+.items__btn {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+}
+
+.items__btn img {
+    width: 100%;
+    height: 290px;
+    border-radius: 4px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border: none;
+}
+
+.items__name {
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+    height: 30px;
+    font-weight: 400;
+    font-size: 25px;
+    background-color: rgba(255, 255, 255, 1);
+}
