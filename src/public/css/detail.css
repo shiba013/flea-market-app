@@ -114,7 +114,7 @@
 }
 
 .description-area {
-    width: fit-content;
+    width: 100%;
     border: none;
     resize: none;
     background-color: rgba(255, 255, 255, 1);
@@ -184,9 +184,10 @@
 }
 
 .read__comment {
-    width: 100%;
+    width: 96%;
     height: 70px;
     margin: 30px 0px;
+    padding: 10px;
     border: none;
     resize: none;
     background-color: rgba(229, 229, 229, 1);
@@ -206,8 +207,8 @@
 }
 
 .write__comment-area {
-    width: 100%;
-    padding: 0;
+    width: 95%;
+    padding: 10px;
     font-weight: 300;
     font-size: 20px;
     margin-bottom: 40px;

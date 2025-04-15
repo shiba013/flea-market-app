@@ -8,31 +8,31 @@
 <div class="address">
     <h2 class="address__title">住所の変更</h2>
     <div class="address__inner">
-        <form action="/address" method="post" class="address-form">
+        <form action="/purchase" method="post" class="address-form">
             @csrf
             <section class="address-form__group">
-                <label for="post_code" class="address-form__label">郵便番号</label>
-                <input type="text" name="post_code" id="post_code" class="address-form__input">
+                <label for="shipping_post_code" class="address-form__label">郵便番号</label>
+                <input type="text" name="shipping_post_code" id="shipping_post_code" class="address-form__input">
                 <p class="alert">
-                    @error('post_code')
+                    @error('shipping_post_code')
                     {{ $message }}
                     @enderror
                 </p>
             </section>
             <section class="address-form__group">
-                <label for="address" class="address-form__label">住所</label>
-                <input type="text" name="address" id="address" class="address-form__input">
+                <label for="shipping_address" class="address-form__label">住所</label>
+                <input type="text" name="shipping_address" id="shipping_address" class="address-form__input">
                 <p class="alert">
-                    @error('address')
+                    @error('shipping_address')
                     {{ $message }}
                     @enderror
                 </p>
             </section>
             <section class="address-form__group">
-                <label for="building" class="address-form__label">建物名</label>
-                <input type="text" name="building" id="building" class="address-form__input">
+                <label for="shipping_building" class="address-form__label">建物名</label>
+                <input type="text" name="shipping_building" id="shipping_building" class="address-form__input">
                 <p class="alert">
-                    @error('building')
+                    @error('shipping_building')
                     {{ $message }}
                     @enderror
                 </p>

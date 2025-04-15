@@ -8,15 +8,15 @@
 <div class="detail">
     <div class="detail__inner">
         <div class="items__img">
-            <img src="" alt="">
+            <img src="{{ asset($item->image) }}">
         </div>
 
         <article class="detail__group">
             <section class="detail-content">
-                <h1 class="detail-content__name">item name</h1>
-                <p class="detail-content__name-p">item brand</p>
+                <h1 class="detail-content__name">{{ $item->name }}</h1>
+                <p class="detail-content__name-p">{{ $item->brand }}</p>
                 <p class="detail-content__price-p">¥
-                    <span class="detail-content__price-span">item price</span>（税込）
+                    <span class="detail-content__price-span">{{ $item->price }}</span>（税込）
                 </p>
                 <table class="review-table">
                     <tr class="review-table__row">
@@ -47,7 +47,7 @@
 
             <section class="detail-content">
                 <h2 class="detail-content__description">商品説明</h2>
-                <textarea name="description" class="description-area" disabled>item description</textarea>
+                <textarea name="description" class="description-area" disabled>{{ $item->description }}</textarea>
             </section>
 
             <section class="detail-content">
@@ -55,15 +55,13 @@
                 <div class="info">
                     <h3 class="info__title">カテゴリー</h3>
                     <p class="category-p">
-                        <span class="category-span">category</span>
-                    </p>
-                    <p class="category-p">
-                        <span class="category-span">id</span>
+                        <span class="category-span">{{-- $item->categories->name --}}</span>
                     </p>
                 </div>
                 <div class="info">
                     <h3 class="info__title">商品の状態</h3>
-                    <p class="condition-p">name</p>
+                    <p class="condition-p">{{ $item->condition->name }}</p>
+                    <input type="hidden" name="">
                 </div>
             </section>
 

@@ -19,7 +19,7 @@ class CreateItemsTable extends Migration
             $table->foreignId('condition_id')->constrained()->cascadeOnDelete();
             $table->string('name', 50);
             $table->unsignedInteger('price');
-            $table->text('description');
+            $table->string('description');
             $table->string('image');
             $table->string('brand', 50)->nullable();
             $table->boolean('is_sold')->default(false);

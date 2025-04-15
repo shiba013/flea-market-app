@@ -4,15 +4,20 @@
 
 .purchase__inner {
     padding: 60px 30px;
+}
+
+.wrap {
     display: grid;
     grid-template-columns: 2fr 1fr;
     column-gap: 30px;
+    row-gap: 50px;
+    width: 100%;
 }
 
 .purchase__group {
+    width: 100%;
     grid-column: 1/2;
-    width: 95%;
-    margin: 0px auto 40px;
+    margin: 0px auto;
     border-bottom: 1px solid rgba(0, 0, 0, 1);
 }
 
@@ -38,6 +43,7 @@
 .purchase__content span {
     font-weight: 400;
     font-size: 27px;
+    padding: 5px;
 }
 
 .purchase__label {
@@ -87,15 +93,15 @@
     color: rgba(0, 115, 204, 1);
 }
 
-.shipping-address__p {
+.shipping-address__p,
+.shipping-address__p span {
     font-weight: 600;
     font-size: 20px;
     line-height: 1.5;
 }
 
-
 .purchase__items {
-    width: 100%;
+    display: grid;
     grid-column: 2/3;
     grid-row: 1/2;
 }
@@ -105,19 +111,22 @@
 }
 
 .order-info {
-    width: 100%;
+    display: grid;
+    padding: 10px;
     border: 1px solid rgba(0, 0, 0, 1);
 }
 
 .order-info__inner {
     width: 100%;
-    height: 90px;
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.order-info__p {
+.order-price__p,
+.order-price__p span,
+.order-pay__p {
+    position: relative;
     font-weight: 400;
     font-size: 20px;
     padding: 10px;
