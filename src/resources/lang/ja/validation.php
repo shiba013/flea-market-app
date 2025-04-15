@@ -136,15 +136,16 @@ return [
 
         'email' => [
             'required' => 'メールアドレスを入力してください',
+            'email.email' => 'メールアドレスは、有効なメールアドレス形式で指定してください',
         ],
 
         'password' => [
             'required' => 'パスワードを入力してください',
-            'confirmed' => 'パスワードが確認用パスワードと一致していません',
         ],
 
         'password_confirmation' => [
             'required' =>'確認用パスワードを入力してください',
+            'confirmed' => 'パスワードが確認用パスワードと一致していません',
         ],
     ],
 
@@ -163,5 +164,6 @@ return [
         'name' => 'ユーザ名',
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'password_confirmation' => '確認用パスワード',
     ],
 ];

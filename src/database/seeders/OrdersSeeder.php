@@ -14,9 +14,6 @@ class OrdersSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('orders')->insert([
-            ['pay' => 'コンビニ支払い'],
-            ['pay' => 'カード支払い'],
-        ]);
+        //
     }
 }

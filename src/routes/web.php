@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MypageController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,15 +17,24 @@ use App\Http\Controllers\Controller;
 |
 */
 
-Route::get('/', [Controller::class ,'index']);
-Route::get('/item', [Controller::class ,'item']);
-Route::get('/detail', [Controller::class ,'detail']);
+Route::get('/', [MypageController::class ,'index']);
+Route::get('/item/{item_id}', [MypageController::class ,'detail']);
 
-Route::middleware('auth')->group(function () {
-    Route::get('/mylist', [Controller::class, 'index']);
-    Route::get('/mypage', [Controller::class ,'mypage']);
-    Route::get('/mypage/profile', [Controller::class ,'profile']);
-    Route::get('/sell', [Controller::class ,'sell']);
-    Route::get('/purchase', [Controller::class ,'purchase']);
-    Route::get('/purchase/address', [Controller::class ,'address']);
+
+Route::middleware('auth')->group(function ()
+{
+    Route::get('/mypage/profile', [AuthController::class, 'address']);
+    Route::post('/mypage/profile', [AuthController::class, 'store']);
+});
+
+
+Route::middleware('auth')->group(function ()
+{
+    Route::get('/mylist', [AuthController::class, 'mylist']);
+    Route::get('/mypage', [MypageController::class ,'mypage']);
+    Route::get('/sell', [ItemController::class ,'sell']);
+    Route::get('/purchase', [OrderController::class ,'purchase']);
+    Route::post('/mylist', [OrderController::class ,'store']);
+    Route::get('/purchase/address', [OrderController::class ,'shippingAddress']);
+    Route::post('/purchase', [OrderController::class ,'edit']);
 });

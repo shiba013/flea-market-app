@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 
 class ItemsSeeder extends Seeder
 {
@@ -14,7 +16,7 @@ class ItemsSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('items')->updateOrInsert([
+        $items = [
             [
                 'user_id' => 1,
                 'condition_id' => 1,
@@ -93,8 +95,28 @@ class ItemsSeeder extends Seeder
                 'name'=> 'メイクセット',
                 'price' => 2500,
                 'description' => '便利なメイクアップセット',
-                'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/%E5%A4%96%E5%87%BA%E3%83%A1%E3%82%A4%E3%82%AF%E3%82%A2%E3%83%83%E3%83%95%E3%82%9A%E3%82%BB%E3%83%83%E3%83%88.jpg',
+                'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/外出メイクアップセット.jpg',
             ],
-        ]);
+        ];
+
+        foreach ($items as $item) {
+            $url = $item['image'];
+            $file_name = basename(parse_url($url, PHP_URL_PATH));
+            $encoded_file_names = str_replace('+', '%2B', rawurlencode($file_name));
+            $encoded_file_name = rawurlencode($file_name);
+            $encoded_file_name = $encoded_file_names;
+            $encoded_url = str_replace($file_name, $encoded_file_name, $url);
+            $contents = Http::get($url)->body();
+            $path = Storage::disk('public')->put('images/' . $file_name, $contents);
+
+            DB::table('items')->insert([
+                'user_id' => $item['user_id'],
+                'condition_id' => $item['condition_id'],
+                'name' => $item['name'],
+                'price' => $item['price'],
+                'description' => $item['description'],
+                'image' => 'storage/images/' . $file_name,
+            ]);
+        }
     }
 }
