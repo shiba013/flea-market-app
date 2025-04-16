@@ -6,9 +6,9 @@
 
 @section('content')
 <div class="address">
-    <h2 class="address__title">住所の変更</h2>
+    <h2 class="address__title">住所の変更</h2>/
     <div class="address__inner">
-        <form action="/purchase" method="post" class="address-form">
+        <form action="/purchase/address/{{ $item->id }}" method="post" class="address-form">
             @csrf
             <section class="address-form__group">
                 <label for="shipping_post_code" class="address-form__label">郵便番号</label>

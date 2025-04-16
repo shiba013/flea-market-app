@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PurchaseRequest;
+use App\Http\Requests\AddressRequest;
 use App\Models\Order;
 use App\Models\Item;
 use App\Models\User;
@@ -10,37 +11,47 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function purchase()
-    {
-        $user = User::all();
-        $items = Item::all();
-        return view('order.purchase', compact('user','items'));
-    }
-
-    public function store(PurchaseRequest $request)
-    {
-        $user = User::find($request->id);
-        $item = Item::find($request->id);
-        //
-        return view('mylist');
-    }
-
-    public function shippingAddress()
+    public function purchase($itemId)
     {
         $user = Auth::user();
-        $items = Item::all();
-        return view('order.address', compact('user','items'));
+        $item = Item::all()->find($itemId);
+        return view('order.purchase', compact('user', 'item'));
     }
 
-    public function edit(PurchaseRequest $request)
+    public function shippingAddress($itemId)
     {
-        $user = User::find($request->id);
-        $address = $request->only([
+        $user = Auth::user();
+        $item = Item::find($itemId);
+        return view('order.address', compact('user', 'item'));
+    }
+
+    public function edit(AddressRequest $request, $itemId)
+    {
+        $user = Auth::user();
+        $item = Item::find($itemId);
+        $request->session()->put('shipping_post_code', $request->shipping_post_code);
+        $request->session()->put('shipping_address', $request->shipping_address);
+        $request->session()->put('shipping_building', $request->shipping_building);
+        return redirect("/purchase/{$itemId}");
+    }
+
+    public function store(PurchaseRequest $request, $itemId)
+    {
+        $user = Auth::user();
+        $item = Item::find($itemId);
+        Order::create([
+            'user_id' => $user->id,
+            'item_id' => $itemId,
+            'shipping_post_code' => session('shipping_post_code', $user->post_code),
+            'shipping_address' => session('shipping_address', $user->address),
+            'shipping_building' => session('shipping_building', $user->building),
+            'pay' => $request->pay,
+        ]);
+        session()->forget([
             'shipping_post_code',
             'shipping_address',
             'shipping_building',
         ]);
-        Order::create($address);
-        return view('order.purchase');
+        return redirect('/');
     }
 }

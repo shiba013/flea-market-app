@@ -39,7 +39,7 @@
                     </tr>
                 </table>
                 <div class="order">
-                    <form action="/purchase" method="get">
+                    <form action="/purchase/{{ $item->id }}" method="get">
                         <input type="submit" value="購入手続きへ" class="order__btn">
                     </form>
                 </div>
@@ -52,23 +52,28 @@
 
             <section class="detail-content">
                 <h2 class="detail-content__info">商品の情報</h2>
-                <div class="info">
-                    <h3 class="info__title">カテゴリー</h3>
-                    <p class="category-p">
-                        <span class="category-span">{{-- $item->categories->name --}}</span>
-                    </p>
-                </div>
-                <div class="info">
-                    <h3 class="info__title">商品の状態</h3>
-                    <p class="condition-p">{{ $item->condition->name }}</p>
-                    <input type="hidden" name="">
-                </div>
+                <table class="info-table">
+                    <tr class="info-table__row">
+                        <th class="info__title">カテゴリー</th>
+                        @foreach($item->categories as $category)
+                        <td class="category-td">
+                            <p class="category-p">{{ $category->name }}</p>
+                        </td>
+                    @endforeach
+                    </tr>
+                </table>
+                <table class="info">
+                    <tr>
+                        <th class="info__title">商品の状態</th>
+                        <td class="condition-td">{{ $item->condition->name }}</td>
+                    </tr>
+                </table>
             </section>
 
             <section class="detail-content">
                 <h2 class="detail-content__comment">コメント（1）</h2>
                 <div class="comment__user">
-                    <img src="" alt="" class="comment__user-img">
+                    <img src="" class="comment__user-img">
                     <p class="comment__user-p">user name</p>
                 </div>
                 <textarea name="" class="read__comment" disabled>コメントを表示</textarea>

@@ -24,19 +24,14 @@ class PurchaseRequest extends FormRequest
     public function rules()
     {
         return [
-            'shipping_post_code' => 'required | regex:/^[0-9]{3}-?[0-9]{4}$/',
-            'shipping_address' => 'required',
-            'shipping_building' => 'required',
+            'pay' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'shipping_post_code.required' => '郵便番号を入力してください',
-            'shipping_post_code.regex' => 'ハイフン込みの8文字で入力してください',
-            'shipping_address.required' => '住所を入力してください',
-            'shipping_building.required' => '建物名を入力してください',
+            'pay.required' => '支払い方法を選択してください',
         ];
     }
 }
