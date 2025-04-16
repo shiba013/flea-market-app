@@ -41,7 +41,7 @@ class ExhibitionRequest extends FormRequest
             'price.regex' => '数値で入力してください',
             'price.min' => '0円以上で入力してください',
             'image.required' => '商品画像を登録してください',
-            'image.mimes' => '[.png」または「.jpeg」形式でアップロードしてください',
+            'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
             'description.required' => '商品の説明を入力してください',
             'description.max' => '255文字以内で入力してください',
             'categories.required' => 'カテゴリーを選択してください',

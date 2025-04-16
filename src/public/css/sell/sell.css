@@ -24,7 +24,6 @@
     width: 680px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     margin-bottom: 70px;
 }
 
@@ -32,6 +31,7 @@
     font-weight: 700;
     font-size: 24px;
     margin-top: 30px;
+    line-height: 2;
 }
 
 .image {
@@ -104,8 +104,8 @@
 
 .sell-form__select-inner::after {
     position: absolute;
-    top: 50%;
-    right: 5%;
+    top: 30%;
+    right: 3%;
     width: 0;
     height: 0;
     border-top: 16px solid rgba(95, 95, 95, 1);
@@ -126,6 +126,7 @@
     color: rgba(95, 95, 95, 1);
     font-weight: 700;
     font-size: 16px;
+    margin-bottom: 10px;
 }
 
 .sell-form__input {
@@ -149,6 +150,7 @@
 .alert {
     color: rgba(255, 0, 0, 1);
     font-size: 20px;
+    padding: 10px 0px;
 }
 
 .sell-form__btn {
