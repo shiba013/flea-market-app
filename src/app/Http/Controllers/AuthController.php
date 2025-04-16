@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
     public function email()
     {
-        return view('auth/verify-email');
+        return view('auth.verify-email');
     }
 
     public function address()

@@ -21,7 +21,7 @@
     <div class="items-list">
         <div class="items-list__inner">
             @foreach($items as $item)
-            <form action="/item/{{ $item->id }}" method="get" class="items-form">
+            <form action="/item/{{ $item->id }}" method="get" class="items-form" enctype="multipart/form-data">
                 <button type="submit" class="items__btn">
                     <img src="{{ asset($item->image) }}">
                     <p class="items__name">{{ $item->name }}</p>

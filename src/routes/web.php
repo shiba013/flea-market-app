@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function ()
     Route::get('/item/{item_id}', [MypageController::class ,'detail']);
     Route::get('/mypage', [MypageController::class ,'mypage']);
     Route::get('/sell', [ItemController::class ,'sell']);
+    Route::post('/sell', [ItemController::class, 'exhibit']);
     Route::get('/purchase/{item_id}', [OrderController::class ,'purchase']);
     Route::get('/purchase/address/{item_id}', [OrderController::class ,'shippingAddress']);
     Route::post('/purchase/address/{item_id}', [OrderController::class ,'edit']);
