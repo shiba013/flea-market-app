@@ -18,23 +18,21 @@ use App\Http\Controllers\ItemController;
 */
 
 Route::get('/', [MypageController::class ,'index']);
-Route::get('/item/{item_id}', [MypageController::class ,'detail']);
-
+Route::get('/item/{item_id}', [MypageController::class ,'introduction']);
 
 Route::middleware('auth')->group(function ()
 {
     Route::get('/mypage/profile', [AuthController::class, 'address']);
     Route::post('/mypage/profile', [AuthController::class, 'store']);
 });
-
-
 Route::middleware('auth')->group(function ()
 {
-    Route::get('/mylist', [AuthController::class, 'mylist']);
+    Route::get('/', [MypageController::class, 'mylist']);
+    Route::get('/item/{item_id}', [MypageController::class ,'detail']);
     Route::get('/mypage', [MypageController::class ,'mypage']);
     Route::get('/sell', [ItemController::class ,'sell']);
-    Route::get('/purchase', [OrderController::class ,'purchase']);
-    Route::post('/mylist', [OrderController::class ,'store']);
-    Route::get('/purchase/address', [OrderController::class ,'shippingAddress']);
-    Route::post('/purchase', [OrderController::class ,'edit']);
+    Route::get('/purchase/{item_id}', [OrderController::class ,'purchase']);
+    Route::get('/purchase/address/{item_id}', [OrderController::class ,'shippingAddress']);
+    Route::post('/purchase/address/{item_id}', [OrderController::class ,'edit']);
+    Route::post('/purchase/{item_id}', [OrderController::class ,'store']);
 });

@@ -4,27 +4,46 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
-use App\Models\Category;
 use App\Models\Condition;
 use Illuminate\Support\Facades\Auth;
 
 class MypageController extends Controller
 {
+    //ログイン前のアクション
     public function index()
     {
         $items = Item::all();
         return view('mylist', compact('items'));
     }
 
-    public function detail($itemId)
+    public function introduction($itemId)
     {
         $item = Item::with('categories','condition')->find($itemId);
         $conditions = Condition::all();
-        $categories = Category::with('items')->get();
-        $categoryIds = $item->categories->pluck('id')->toArray();
-        return view('detail', compact('item', 'conditions', 'categories', 'categoryIds'));
+        return view('detail', compact('item', 'conditions'));
     }
 
+    //ログイン後のアクション
+    public function mylist(Request $request)
+    {
+        $tab = $request->query('tab');
+        if($tab === 'mylist')
+        {
+            $items = Item::all();
+        }
+        else
+        {
+            $items = Item::all();
+        }
+        return view('mylist', compact('tab', 'items'));
+    }
+
+    public function detail($itemId)
+    {
+        $item = Item::with('categories', 'condition')->find($itemId);
+        $conditions = Condition::all();
+        return view('detail', compact('item', 'conditions'));
+    }
 
     public function profile()
     {

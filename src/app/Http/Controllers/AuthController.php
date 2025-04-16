@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Fortify;
 use App\Models\User;
 use App\Models\Item;
-use App\Http\Requests\AddressRequest;
+use App\Http\Requests\ProfileRequest;
 
 class AuthController extends Controller
 {
@@ -22,7 +22,7 @@ class AuthController extends Controller
         return view('mypage.profile', compact('user'));
     }
 
-    public function store(AddressRequest $request)
+    public function store(ProfileRequest $request)
     {
         $user = Auth::user()->update([
             'name' => $request->name ?? $user->name,
@@ -32,11 +32,5 @@ class AuthController extends Controller
         ]);
         Auth::logout();
         return redirect('/login');
-    }
-
-    public function mylist()
-    {
-        $items = Item::all();
-        return view('mylist', compact('items'));
     }
 }

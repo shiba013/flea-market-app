@@ -23,7 +23,7 @@
 }
 
 .detail__group {
-    width: 95%;
+    width: 100%;
     margin: 0px auto;
 }
 
@@ -130,28 +130,30 @@
     margin-bottom: 20px;
 }
 
-.info {
+.info-table {
     display: flex;
     align-items: center;
-    gap: 30px;
     margin-bottom: 20px;
 }
 
 .info__title {
     font-weight: 700;
     font-size: 24px;
+    padding-right: 15px;
+    width: 150px;
 }
 
-.condition-p,
-.category-span {
+.condition-td,
+.category-p {
     font-weight: 400;
     font-size: 20px;
 }
 
-.category-p {
-    display: block;
+.category-td {
+    display: inline-block;
     width: fit-content;
     padding: 5px 15px;
+    margin: 5px 5px 5px 0px;
     background-color: rgba(217, 217, 217, 1);
     border: none;
     border-radius: 200px;
