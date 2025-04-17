@@ -20,6 +20,8 @@ input[type="radio"]#my-list:checked+label a {
     color: rgba(255, 0, 0, 1);
 }
 
+
+
 input[type="radio"] {
     display: none;
 }

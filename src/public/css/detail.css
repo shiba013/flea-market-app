@@ -74,9 +74,10 @@
     fill: #4b4b4b;
 }
 
-#like:checked+label .like-icon {
+.like-icon.liked {
     filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(3583%) hue-rotate(0deg) brightness(106%) contrast(104%);
 }
+
 
 #comment:checked+label .comment-icon {
     filter: brightness(0) saturate(100%) invert(92%) sepia(18%) saturate(6305%) hue-rotate(173deg) brightness(103%) contrast(90%);

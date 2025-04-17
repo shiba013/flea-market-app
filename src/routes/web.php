@@ -16,12 +16,13 @@ use App\Http\Controllers\ItemController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/register', [AuthController::class ,'register']);
 Route::post('/register', [AuthController::class ,'createUser']);
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginUser']);
-Route::get('/', [MypageController::class ,'index']);
-Route::get('/item/{item_id}', [MypageController::class ,'introduction']);
+Route::get('/', [MypageController::class ,'home']);
+Route::get('/item/{item_id}', [MypageController::class ,'showItem']);
 
 Route::middleware('auth')->group(function ()
 {
@@ -34,5 +35,5 @@ Route::middleware('auth')->group(function ()
     Route::get('/purchase/address/{item_id}', [OrderController::class ,'shippingAddress']);
     Route::post('/purchase/address/{item_id}', [OrderController::class ,'edit']);
     Route::post('/purchase/{item_id}', [OrderController::class ,'store']);
+    Route::post('/item/{item_id}/like', [MypageController::class ,'like']);
 });
-
