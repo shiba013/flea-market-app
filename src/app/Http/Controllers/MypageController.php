@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest;
 use App\Models\Item;
 use App\Models\Condition;
 use App\Models\User;
 use App\Models\Like;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 
 class MypageController extends Controller
@@ -42,13 +44,16 @@ class MypageController extends Controller
 
     public function introduction($itemId)
     {
+        $conditions = Condition::all();
         $item = Item::with(['categories', 'condition'])
         ->withCount(['likes as is_liked' => function($query)
         {
             $query->where('user_id', auth()->id());
         }])->find($itemId);
-        $conditions = Condition::all();
-        return view('detail', compact('item', 'conditions'));
+        $commented = Comment::where('item_id', $itemId)
+        ->where('user_id', auth()->id())
+        ->exists();
+        return view('detail', compact('conditions', 'item', 'commented'));
     }
 
     public function mylist(Request $request)
@@ -66,13 +71,16 @@ class MypageController extends Controller
 
     public function detail($itemId)
     {
+        $conditions = Condition::all();
         $item = Item::with(['categories', 'condition'])
         ->withCount(['likes as is_liked' => function($query)
         {
             $query->where('user_id', auth()->id());
         }])->find($itemId);
-        $conditions = Condition::all();
-        return view('detail', compact('item', 'conditions'));
+        $commented = Comment::where('item_id', $itemId)
+        ->where('user_id', auth()->id())
+        ->exists();
+        return view('detail', compact('conditions', 'item', 'commented'));
     }
 
     public function like($itemId)
@@ -87,6 +95,16 @@ class MypageController extends Controller
                 'item_id' => $itemId,
             ]);
         }
+        return redirect("/item/{$itemId}");
+    }
+
+    public function comment(CommentRequest $request, $itemId)
+    {
+        Comment::updateOrCreate([
+            'user_id' => auth()->id(),
+            'item_id' => $itemId,
+            'comment' => $request->comment,
+        ]);
         return redirect("/item/{$itemId}");
     }
 
