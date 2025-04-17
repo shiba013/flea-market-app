@@ -35,4 +35,5 @@ Route::middleware('auth')->group(function ()
     Route::post('/purchase/address/{item_id}', [TransactionController::class ,'edit']);
     Route::post('/purchase/{item_id}', [TransactionController::class ,'store']);
     Route::post('/item/{item_id}/like', [MypageController::class ,'like']);
+    Route::post('/item/{item_id}/comment', [MypageController::class, 'comment']);
 });

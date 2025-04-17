@@ -19,8 +19,6 @@ class CreateCommentsTable extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('comment');
             $table->timestamps();
-
-            $table->unique(['item_id', 'user_id']);
         });
     }
 

@@ -23,8 +23,8 @@
                         <th>
                             <form action="/item/{{ $item->id }}/like" method="post">
                                 @csrf
-                                <input type="checkbox" name="like" id="like-{{ $item->id }}" class="like-btn">
-                                <label for="like-{{ $item->id }}">
+                                <input type="checkbox" name="like" id="like" class="like-btn">
+                                <label for="like">
                                     <img src="{{ asset('icon/star.png') }}" alt="star"
                                     class="like-icon {{ $item->likes->pluck('user_id')->contains(auth()->id()) ? 'liked' : '' }}"
                                     onclick="this.closest('form').submit();">
@@ -34,13 +34,13 @@
                         <th>
                             <input type="checkbox" name="comment" id="comment" class="comment-btn">
                             <label for="comment">
-                                <img src="{{ asset('icon/speechBub.png') }}" alt="speechBub" class="comment-icon">
+                                <img src="{{ asset('icon/speechBub.png') }}" alt="speechBub" class="comment-icon {{ $commented ? 'commented' : '' }}" >
                             </label>
                         </th>
                     </tr>
                     <tr class="review-table__row">
                         <th class="review-table__data">{{ $item->likes->count() }}</th>
-                        <th class="review-table__data">5{{ $item->likes->count() }}</th>
+                        <th class="review-table__data">{{ $item->comments->count() }}</th>
                     </tr>
                 </table>
                 <div class="order">
@@ -76,17 +76,23 @@
             </section>
 
             <section class="detail-content">
-                <h2 class="detail-content__comment">コメント（1）</h2>
+                <h2 class="detail-content__comment">コメント（{{ $item->comments->count() }}）</h2>
+                @foreach($item->comments as $comment)
                 <div class="comment__user">
                     <img src="{{ asset($item->image) }}" class="comment__user-img">
-                    <p class="comment__user-p">user name</p>
+                    <p class="comment__user-p">{{ $comment->user->name }}</p>
                 </div>
-                <textarea name="" class="read__comment" disabled>コメントを表示</textarea>
-
-                <form action="" method="post" class="comment-form">
+                <textarea name="" class="read__comment" disabled>{{ $comment->comment }}</textarea>
+                @endforeach
+                <form action="/item/{{ $item->id }}/comment" method="post" class="comment-form">
                     @csrf
                     <label for="comment" class="write__comment">商品へのコメント</label>
-                    <textarea name="comment" id="comment" class="write__comment-area" rows="10">ここにコメントを記載</textarea>
+                    <textarea name="comment" id="comment" class="write__comment-area" rows="10">{{ old('comment')}}</textarea>
+                    <p class="alert">
+                        @error('comment')
+                        {{ $message }}
+                        @enderror
+                    </p>
                     <input type="submit" value="コメントを送信する" class="write__comment-btn">
                 </form>
             </section>
