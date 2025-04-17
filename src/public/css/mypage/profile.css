@@ -34,19 +34,24 @@
     width: 100%;
 }
 
-.image__input {
+.image__group {
     border-radius: 50%;
     width: 150px;
     height: 150px;
     position: relative;
+    background-color: rgba(217, 217, 217, 1);
 }
 
-.image__input::before {
-    content: "";
-    position: absolute;
+.image__img {
+    border-radius: 50%;
     width: 150px;
     height: 150px;
+    position: absolute;
     background-color: rgba(217, 217, 217, 1);
+}
+
+.image__input {
+    display: none;
 }
 
 .image__label {
@@ -55,7 +60,7 @@
     border-radius: 10px;
     line-height: 3;
     width: 30%;
-    margin-left: 50px;
+    margin-left: 100px;
     color: rgba(255, 85, 85, 1);
     font-weight: 700;
     font-size: 20px;

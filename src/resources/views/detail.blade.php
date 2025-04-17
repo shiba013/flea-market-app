@@ -79,10 +79,10 @@
                 <h2 class="detail-content__comment">コメント（{{ $item->comments->count() }}）</h2>
                 @foreach($item->comments as $comment)
                 <div class="comment__user">
-                    <img src="{{ asset($item->image) }}" class="comment__user-img">
+                    <img src="{{ asset($comment->user->image) }}" class="comment__user-img">
                     <p class="comment__user-p">{{ $comment->user->name }}</p>
                 </div>
-                <textarea name="" class="read__comment" disabled>{{ $comment->comment }}</textarea>
+                <textarea class="read__comment" disabled>{{ $comment->comment }}</textarea>
                 @endforeach
                 <form action="/item/{{ $item->id }}/comment" method="post" class="comment-form">
                     @csrf
