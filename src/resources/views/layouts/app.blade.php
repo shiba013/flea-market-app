@@ -16,7 +16,7 @@
         <div class="header__inner">
             <div class="header__title">
                 <div class="header__logo">
-                    <a href="/">
+                    <a href="/" class="header__logo-a">
                         <img src="{{ asset('icon/logo.svg') }}" alt="社名ロゴ">
                     </a>
                 </div>

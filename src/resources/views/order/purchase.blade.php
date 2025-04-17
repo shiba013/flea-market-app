@@ -14,7 +14,7 @@
                     <img src="{{ asset($item->image) }}">
                     <div class="purchase__content">
                         <h2>{{ $item->name }}</h2>
-                        <p><span>¥</span>{{ $item->price }}</p>
+                        <p><span>¥</span>{{ number_format($item->price) }}</p>
                     </div>
                 </div>
             </section>
@@ -53,7 +53,7 @@
                 <div class="order-info">
                     <div class="order-info__inner">
                         <p class="order-price__p">商品代金</p>
-                        <p class="order-price__p"><span>¥</span>{{ $item->price }}</p>
+                        <p class="order-price__p"><span>¥</span>{{ number_format($item->price) }}</p>
                     </div>
                     <div class="order-info__inner">
                         <p class="order-pay__p">支払い方法</p>

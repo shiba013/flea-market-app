@@ -16,20 +16,18 @@ use App\Http\Controllers\ItemController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/register', [AuthController::class ,'register']);
+Route::post('/register', [AuthController::class ,'createUser']);
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'loginUser']);
 Route::get('/', [MypageController::class ,'index']);
 Route::get('/item/{item_id}', [MypageController::class ,'introduction']);
 
 Route::middleware('auth')->group(function ()
 {
+    Route::get('/mypage', [MypageController::class ,'mypage']);
     Route::get('/mypage/profile', [AuthController::class, 'address']);
     Route::post('/mypage/profile', [AuthController::class, 'store']);
-});
-Route::middleware('auth')->group(function ()
-{
-    Route::get('/', [MypageController::class, 'mylist']);
-    Route::get('/item/{item_id}', [MypageController::class ,'detail']);
-    Route::get('/mypage', [MypageController::class ,'mypage']);
     Route::get('/sell', [ItemController::class ,'sell']);
     Route::post('/sell', [ItemController::class, 'exhibit']);
     Route::get('/purchase/{item_id}', [OrderController::class ,'purchase']);
@@ -37,3 +35,4 @@ Route::middleware('auth')->group(function ()
     Route::post('/purchase/address/{item_id}', [OrderController::class ,'edit']);
     Route::post('/purchase/{item_id}', [OrderController::class ,'store']);
 });
+
