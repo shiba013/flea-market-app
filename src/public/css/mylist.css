@@ -15,7 +15,8 @@
     border-bottom: 2px solid rgba(95, 95, 95, 1);
 }
 
-input[type="radio"]:checked+.title__name {
+input[type="radio"]#all:checked+label a,
+input[type="radio"]#my-list:checked+label a {
     color: rgba(255, 0, 0, 1);
 }
 
@@ -39,7 +40,8 @@ a {
     margin-left: 100px;
 }
 
-.items-list {
+.items-list,
+.my-list {
     margin: 0px auto;
     padding: 50px;
     max-width: 1540px;

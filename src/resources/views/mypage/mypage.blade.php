@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<?php $tab = $tab ?? ''; ?>
 <div class="content">
     <div class="edit-profile">
         <form action="/mypage/profile" method="get" class="edit-form">
@@ -17,94 +18,42 @@
     </div>
     <div class="top__title">
         <div class="title-list">
-            <input type="radio" name="name-tab" id="recommend" checked>
-            <label for="recommend" class="title__name">出品した商品</label>
-            <a href="/">
-            <input type="radio" name="name-tab" id="my-list">
-            <label for="my-list" class="title__name">購入した商品</label>
-            </a>
+            <input type="radio" name="name-tab" id="sell" {{ $tab == 'sell' ? 'checked' : '' }}>
+            <label for="sell" class="title__name">
+                <a href="/mypage/?tab=sell">出品した商品</a>
+            </label>
+            <input type="radio" name="name-tab" id="buy" {{ $tab == 'buy' ? 'checked' : '' }}>
+            <label for="buy" class="title__name">
+                <a href="/mypage/?tab=buy">購入した商品</a>
+            </label>
         </div>
     </div>
-    <div class="items-list">
+    @if($tab == 'sell')
+    <div class="sell">
         <div class="items-list__inner">
-            <form action="/detail" method="get" class="items-form">
+            @foreach($items as $item)
+            <form action="/item/{{ $item->id }}" method="get" class="items-form" enctype="multipart/form-data">
                 <button type="submit" class="items__btn">
-                    <img src="" alt="">
-                    <p class="items__name">商品名</p>
+                    <img src="{{ asset($item->image) }}">
+                    <p class="items__name">{{ $item->name }}</p>
                 </button>
             </form>
-            <form action="" method="get" class="items-form">
-                <button type="submit" class="items__btn">
-                    <img src="" alt="">
-                    <p class="items__name">商品名</p>
-                </button>
-            </form>
-            <form action="" method="get" class="items-form">
-                <button type="submit" class="items__btn">
-                    <img src="" alt="">
-                    <p class="items__name">商品名</p>
-                </button>
-            </form>
-            <form action="" method="get" class="items-form">
-                <button type="submit" class="items__btn">
-                    <img src="" alt="">
-                    <p class="items__name">商品名</p>
-                </button>
-            </form>
-            <form action="" method="get" class="items-form">
-                <button type="submit" class="items__btn">
-                    <img src="" alt="">
-                    <p class="items__name">商品名</p>
-                </button>
-            </form>
-            <form action="" method="get" class="items-form">
-                <button type="submit" class="items__btn">
-                    <img src="" alt="">
-                    <p class="items__name">商品名</p>
-                </button>
-            </form>
-            <form action="" method="get" class="items-form">
-                <button type="submit" class="items__btn">
-                    <img src="" alt="">
-                    <p class="items__name">商品名</p>
-                </button>
-            </form>
+            @endforeach
         </div>
     </div>
-
-    <div class="items-list">
-        <div class="items-list__inner" id="my-list">
-            <form action="" method="get" class="items-form">
+    @elseif($tab == 'buy')
+    <div class="buy">
+        <div class="items-list__inner">
+            @foreach($items as $item)
+            <form action="/item/{{ $item->id }}" method="get" class="items-form" enctype="multipart/form-data">
                 <button type="submit" class="items__btn">
-                    <img src="" alt="">
-                    <p class="items__name">商品名</p>
+                    <img src="{{ asset($item->image) }}">
+                    <p class="items__name">{{ $item->name }}</p>
                 </button>
             </form>
-            <form action="" method="get" class="items-form">
-                <button type="submit" class="items__btn">
-                    <img src="" alt="">
-                    <p class="items__name">商品名</p>
-                </button>
-            </form>
-            <form action="" method="get" class="items-form">
-                <button type="submit" class="items__btn">
-                    <img src="" alt="">
-                    <p class="items__name">商品名</p>
-                </button>
-            </form>
-            <form action="" method="get" class="items-form">
-                <button type="submit" class="items__btn">
-                    <img src="" alt="">
-                    <p class="items__name">商品名</p>
-                </button>
-            </form>
-            <form action="" method="get" class="items-form">
-                <button type="submit" class="items__btn">
-                    <img src="" alt="">
-                    <p class="items__name">商品名</p>
-                </button>
-            </form>
+            @endforeach
         </div>
     </div>
+    @endif
 </div>
 @endsection

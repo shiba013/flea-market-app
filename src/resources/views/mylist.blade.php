@@ -5,19 +5,34 @@
 @endsection
 
 @section('content')
+<?php $tab = $tab ?? ''; ?>
 <div class="content">
     <div class="top__title">
         <div class="title-list">
-            <a href="/?tab=all">
-                <input type="radio" name="name-tab" id="recommend" checked>
-                <label for="recommend" class="title__name">おすすめ</label>
-            </a>
-            <a href="/?tab=mylist">
-                <input type="radio" name="name-tab" id="my-list">
-                <label for="my-list" class="title__name">マイリスト</label>
-            </a>
+                <input type="radio" name="name-tab" id="all" {{ $tab == '' ? 'checked' : '' }}>
+                <label for="all" class="title__name">
+                    <a href="/">おすすめ</a>
+                </label>
+                <input type="radio" name="name-tab" id="my-list" {{ $tab == 'mylist' ? 'checked' : '' }}>
+                <label for="my-list" class="title__name">
+                    <a href="/?tab=mylist">マイリスト</a>
+                </label>
         </div>
     </div>
+    @if($tab == 'mylist')
+    <div class="my-list">
+        <div class="items-list__inner">
+            @foreach($items as $item)
+            <form action="/item/{{ $item->id }}" method="get" class="items-form" enctype="multipart/form-data">
+                <button type="submit" class="items__btn">
+                    <img src="{{ asset($item->image) }}">
+                    <p class="items__name">{{ $item->name }}</p>
+                </button>
+            </form>
+            @endforeach
+        </div>
+    </div>
+    @else
     <div class="items-list">
         <div class="items-list__inner">
             @foreach($items as $item)
@@ -30,5 +45,6 @@
             @endforeach
         </div>
     </div>
+    @endif
 </div>
 @endsection

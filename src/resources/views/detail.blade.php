@@ -16,7 +16,7 @@
                 <h1 class="detail-content__name">{{ $item->name }}</h1>
                 <p class="detail-content__name-p">{{ $item->brand }}</p>
                 <p class="detail-content__price-p">¥
-                    <span class="detail-content__price-span">{{ $item->price }}</span>（税込）
+                    <span class="detail-content__price-span">{{ number_format($item->price) }}</span>（税込）
                 </p>
                 <table class="review-table">
                     <tr class="review-table__row">

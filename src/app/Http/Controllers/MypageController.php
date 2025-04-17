@@ -5,10 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Condition;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class MypageController extends Controller
 {
+    public function home()
+    {
+        if (Auth::check()) {
+            return $this->mylist();
+            return $this->detail();
+        }
+        return $this->index();
+        return $this->introduction();
+    }
+
     //ログイン前のアクション
     public function index()
     {
@@ -26,15 +37,9 @@ class MypageController extends Controller
     //ログイン後のアクション
     public function mylist(Request $request)
     {
+        $user = Auth::user();
         $tab = $request->query('tab');
-        if($tab === 'mylist')
-        {
-            $items = Item::all();
-        }
-        else
-        {
-            $items = Item::all();
-        }
+        $items = Item::all();
         return view('mylist', compact('tab', 'items'));
     }
 
@@ -45,24 +50,11 @@ class MypageController extends Controller
         return view('detail', compact('item', 'conditions'));
     }
 
-    public function profile()
+    public function mypage(Request $request)
     {
-        return view('mypage.profile');
-    }
-
-    public function storeProfile(Request $request)
-    {
-        $user = Auth::user()->update([
-            'name' => $request->name ?? $user->name,
-            'post_code' => $request->post_code ?? $request->post_code,
-            'address' => $request->address ?? $request->address,
-            'building' => $request->building ?? $request->building,
-        ]);
-        return redirect('/mypage/profile');
-    }
-
-    public function mypage()
-    {
-        return view('mypage.mypage');
+        $tab = $request->query('tab');
+        $items = Item::all();
+        $user = Auth::user();
+        return view('mypage.mypage', compact('tab', 'items', 'user'));
     }
 }
