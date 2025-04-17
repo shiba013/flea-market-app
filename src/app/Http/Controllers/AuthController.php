@@ -41,8 +41,13 @@ class AuthController extends Controller
     public function store(ProfileRequest $request)
     {
         $user = Auth::user();
+        $image = $request->file('image');
+        $image_name = $image->getClientOriginalName();
+        $image->storeAs('images', $image_name, 'public');
+
         $first = is_null($user->post_code) && is_null($user->address) && is_null($user->building);
         $user->update([
+            'image' => 'storage/images/' . $image_name,
             'name' => $request->name ?? $user->name,
             'post_code' => $request->post_code,
             'address' => $request->address,

@@ -10,7 +10,7 @@
     <div class="edit-profile">
         <form action="/mypage/profile" method="get" class="edit-form">
             <div class="edit-form__item">
-                <img src="" alt="" class="edit-form__img">
+                <img src="{{ asset($user->image) }}" class="edit-form__img">
                 <p class="edit-form__p">{{ Auth::user()->name }}</p>
                 <input type="submit" value="プロフィールを編集" class="edit-form__input">
             </div>

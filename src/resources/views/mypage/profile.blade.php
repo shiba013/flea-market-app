@@ -12,7 +12,12 @@
             @csrf
             <section class="profile-form__group">
                 <div class="image">
-                    <input type="file" name="image" id="image" class="image__input" value="{{ old('image') }}">
+                    <div class="image__group">
+                        @if(!empty($user->image))
+                        <img src="{{ asset($user->image) }}" class="image__img">
+                        @endif
+                        <input type="file" name="image" id="image" class="image__input">
+                    </div>
                     <label for="image" class="image__label">画像を選択する</label>
                     <p class="alert">
                         @error('image')
