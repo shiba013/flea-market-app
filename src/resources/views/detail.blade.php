@@ -21,10 +21,15 @@
                 <table class="review-table">
                     <tr class="review-table__row">
                         <th>
-                            <input type="checkbox" name="like" id="like" class="like-btn">
-                            <label for="like">
-                                <img src="{{ asset('icon/star.png') }}" alt="star" class="like-icon">
-                            </label>
+                            <form action="/item/{{ $item->id }}/like" method="post">
+                                @csrf
+                                <input type="checkbox" name="like" id="like-{{ $item->id }}" class="like-btn">
+                                <label for="like-{{ $item->id }}">
+                                    <img src="{{ asset('icon/star.png') }}" alt="star"
+                                    class="like-icon {{ $item->likes->pluck('user_id')->contains(auth()->id()) ? 'liked' : '' }}"
+                                    onclick="this.closest('form').submit();">
+                                </label>
+                            </form>
                         </th>
                         <th>
                             <input type="checkbox" name="comment" id="comment" class="comment-btn">
@@ -34,8 +39,8 @@
                         </th>
                     </tr>
                     <tr class="review-table__row">
-                        <th class="review-table__data">1</th>
-                        <th class="review-table__data">5</th>
+                        <th class="review-table__data">{{ $item->likes->count() }}</th>
+                        <th class="review-table__data">5{{ $item->likes->count() }}</th>
                     </tr>
                 </table>
                 <div class="order">
