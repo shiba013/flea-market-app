@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MypageController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ItemController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,11 +28,11 @@ Route::middleware('auth')->group(function ()
     Route::get('/mypage', [MypageController::class ,'mypage']);
     Route::get('/mypage/profile', [AuthController::class, 'address']);
     Route::post('/mypage/profile', [AuthController::class, 'store']);
-    Route::get('/sell', [ItemController::class ,'sell']);
-    Route::post('/sell', [ItemController::class, 'exhibit']);
-    Route::get('/purchase/{item_id}', [OrderController::class ,'purchase']);
-    Route::get('/purchase/address/{item_id}', [OrderController::class ,'shippingAddress']);
-    Route::post('/purchase/address/{item_id}', [OrderController::class ,'edit']);
-    Route::post('/purchase/{item_id}', [OrderController::class ,'store']);
+    Route::get('/sell', [TransactionController::class ,'sell']);
+    Route::post('/sell', [TransactionController::class, 'exhibit']);
+    Route::get('/purchase/{item_id}', [TransactionController::class ,'purchase']);
+    Route::get('/purchase/address/{item_id}', [TransactionController::class ,'shippingAddress']);
+    Route::post('/purchase/address/{item_id}', [TransactionController::class ,'edit']);
+    Route::post('/purchase/{item_id}', [TransactionController::class ,'store']);
     Route::post('/item/{item_id}/like', [MypageController::class ,'like']);
 });

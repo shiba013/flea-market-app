@@ -78,7 +78,7 @@
             <section class="detail-content">
                 <h2 class="detail-content__comment">コメント（1）</h2>
                 <div class="comment__user">
-                    <img src="" class="comment__user-img">
+                    <img src="{{ asset($item->image) }}" class="comment__user-img">
                     <p class="comment__user-p">user name</p>
                 </div>
                 <textarea name="" class="read__comment" disabled>コメントを表示</textarea>

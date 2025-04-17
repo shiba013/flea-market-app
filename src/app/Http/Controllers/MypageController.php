@@ -29,7 +29,6 @@ class MypageController extends Controller
     {
         $tab = $request->query('tab');
         $items = collect();
-
         if ($tab === 'mylist') {
             if (Auth::check()) {
                 $likedItemIds = Like::where('user_id', Auth::id())->pluck('item_id');
