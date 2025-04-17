@@ -9,6 +9,7 @@ use App\Models\Condition;
 use App\Models\User;
 use App\Models\Like;
 use App\Models\Comment;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 
 class MypageController extends Controller
@@ -111,8 +112,14 @@ class MypageController extends Controller
     public function mypage(Request $request)
     {
         $tab = $request->query('tab');
-        $items = Item::all();
         $user = Auth::user();
+
+        if ($tab == 'sell') {
+            $items = Item::where('user_id', $user->id)->get();
+        } else {
+            $items = Item::whereIn('id', Order::where('user_id', $user->id)->pluck('item_id'))
+            ->where('is_sold', 1)->get();
+        }
         return view('mypage.mypage', compact('tab', 'items', 'user'));
     }
 }

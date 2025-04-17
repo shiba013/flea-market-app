@@ -78,6 +78,8 @@ class TransactionController extends Controller
             'shipping_building' => session('shipping_building', $user->building),
             'pay' => $request->pay,
         ]);
+        $item->update(['is_sold' => true]);
+
         session()->forget([
             'shipping_post_code',
             'shipping_address',
