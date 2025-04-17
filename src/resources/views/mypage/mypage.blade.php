@@ -35,6 +35,11 @@
             <form action="/item/{{ $item->id }}" method="get" class="items-form" enctype="multipart/form-data">
                 <button type="submit" class="items__btn">
                     <img src="{{ asset($item->image) }}">
+                    @if($item->is_sold == 1)
+                    <div class="sold">
+                        <p class="sold__label">sold</p>
+                    </div>
+                    @endif
                     <p class="items__name">{{ $item->name }}</p>
                 </button>
             </form>
@@ -48,6 +53,11 @@
             <form action="/item/{{ $item->id }}" method="get" class="items-form" enctype="multipart/form-data">
                 <button type="submit" class="items__btn">
                     <img src="{{ asset($item->image) }}">
+                    @if($item->is_sold == 1)
+                    <div class="sold">
+                        <p class="sold__label">sold</p>
+                    </div>
+                    @endif
                     <p class="items__name">{{ $item->name }}</p>
                 </button>
             </form>
