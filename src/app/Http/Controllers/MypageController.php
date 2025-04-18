@@ -32,6 +32,7 @@ class MypageController extends Controller
     {
         $tab = $request->query('tab');
         $items = collect();
+
         if ($tab === 'mylist') {
             if (Auth::check()) {
                 $likedItemIds = Like::where('user_id', Auth::id())->pluck('item_id');
@@ -51,6 +52,7 @@ class MypageController extends Controller
         {
             $query->where('user_id', auth()->id());
         }])->find($itemId);
+
         $commented = Comment::where('item_id', $itemId)
         ->where('user_id', auth()->id())
         ->exists();
@@ -61,7 +63,7 @@ class MypageController extends Controller
     {
         $user = Auth::user();
         $tab = $request->query('tab');
-        $items = $user->LikedItems()->with('likes')->get();
+
         if ($tab == 'mylist') {
             $items = $user->LikedItems()->with('likes')->get();
         } else {
@@ -121,5 +123,10 @@ class MypageController extends Controller
             ->where('is_sold', 1)->get();
         }
         return view('mypage.mypage', compact('tab', 'items', 'user'));
+    }
+
+    public function search(Request $request)
+    {
+        //
     }
 }

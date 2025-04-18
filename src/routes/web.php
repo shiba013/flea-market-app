@@ -22,6 +22,7 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginUser']);
 Route::get('/', [MypageController::class ,'home']);
 Route::get('/item/{item_id}', [MypageController::class ,'showItem']);
+Route::get('/search', [MypageController::class, 'search']);
 
 Route::middleware('auth')->group(function ()
 {
