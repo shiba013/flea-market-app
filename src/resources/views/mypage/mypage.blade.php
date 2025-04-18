@@ -37,7 +37,7 @@
                     <img src="{{ asset($item->image) }}">
                     @if($item->is_sold == 1)
                     <div class="sold">
-                        <p class="sold__label">sold</p>
+                        <p class="sold__label">Sold</p>
                     </div>
                     @endif
                     <p class="items__name">{{ $item->name }}</p>
@@ -55,7 +55,7 @@
                     <img src="{{ asset($item->image) }}">
                     @if($item->is_sold == 1)
                     <div class="sold">
-                        <p class="sold__label">sold</p>
+                        <p class="sold__label">Sold</p>
                     </div>
                     @endif
                     <p class="items__name">{{ $item->name }}</p>
