@@ -18,6 +18,7 @@
 .items__img img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
     background-color: rgba(217, 217, 217, 1);
     border-radius: 4px;
 }
@@ -77,12 +78,6 @@
 .like-icon.liked {
     filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(3583%) hue-rotate(0deg) brightness(106%) contrast(104%);
 }
-
-/*
-#comment:checked+label .comment-icon {
-    filter: brightness(0) saturate(100%) invert(92%) sepia(18%) saturate(6305%) hue-rotate(173deg) brightness(103%) contrast(90%);
-}
-*/
 
 .comment-icon.commented {
     filter: brightness(0) saturate(100%) invert(92%) sepia(18%) saturate(6305%) hue-rotate(173deg) brightness(103%) contrast(90%);
@@ -183,6 +178,7 @@
     border-radius: 50%;
     width: 70px;
     height: 70px;
+    object-fit: cover;
     background-color: rgba(217, 217, 217, 1);
 }
 
