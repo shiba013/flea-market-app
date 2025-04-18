@@ -11,11 +11,19 @@
         <div class="title-list">
                 <input type="radio" name="name-tab" id="all" {{ $tab == '' ? 'checked' : '' }}>
                 <label for="all" class="title__name">
+                    @if(request('keyword'))
+                    <a href="/search?tab=&keyword={{ request('keyword') }}">おすすめ</a>
+                    @else
                     <a href="/">おすすめ</a>
+                    @endif
                 </label>
                 <input type="radio" name="name-tab" id="my-list" {{ $tab == 'mylist' ? 'checked' : '' }}>
                 <label for="my-list" class="title__name">
+                    @if(request('keyword'))
+                    <a href="/search?tab=mylist&keyword={{ request('keyword') }}">マイリスト</a>
+                    @else
                     <a href="/?tab=mylist">マイリスト</a>
+                    @endif
                 </label>
         </div>
     </div>

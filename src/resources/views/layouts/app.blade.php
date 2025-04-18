@@ -24,7 +24,8 @@
                 <div class="search">
                     <form action="/search" method="get" class="search-form">
                         @csrf
-                        <input type="text" name="keyword" value="{{ old('keyword') }}" class="search-form__input" placeholder="なにをお探しですか？">
+                        <input type="text" name="keyword" value="{{ request('keyword') }}" class="search-form__input" placeholder="なにをお探しですか？">
+                        <input type="hidden" name="tab" value="{{ request('tab') }}">
                         <input type="image" src="{{ asset('icon/search.png') }}" alt="検索ボタン" class="search-form__btn" width="25" height="25">
                     </form>
                 </div>
