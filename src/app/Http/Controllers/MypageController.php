@@ -69,6 +69,11 @@ class MypageController extends Controller
         } else {
             $items = Item::with('likes')->get();
         }
+
+        if ($request->query('status') == 'success') {
+            session()->flash('message', '支払いが完了しました。');
+        }
+
         return view('mylist', compact('tab', 'items'));
     }
 

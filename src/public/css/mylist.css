@@ -1,3 +1,15 @@
+.alert {
+    padding: 20px 30px;
+    border: none;
+    background-color: rgba(183, 250, 195, 1);
+}
+
+.alert__session {
+    color: rgba(95, 95, 95, 1);
+    font-weight: 600;
+    font-size: 20px;
+}
+
 .content {
     margin: 0px auto;
     max-width: 1540px;
@@ -19,8 +31,6 @@ input[type="radio"]#all:checked+label a,
 input[type="radio"]#my-list:checked+label a {
     color: rgba(255, 0, 0, 1);
 }
-
-
 
 input[type="radio"] {
     display: none;

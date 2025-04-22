@@ -30,6 +30,7 @@
 .purchase__group img {
     width: 180px;
     height: 180px;
+    object-fit: cover;
     background-color: rgba(217, 217, 217, 1);
 }
 

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\StripeWebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::post('/login', [AuthController::class, 'loginUser']);
 Route::get('/', [MypageController::class ,'home']);
 Route::get('/item/{item_id}', [MypageController::class ,'showItem']);
 Route::get('/search', [MypageController::class, 'search']);
+Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle']);
 
 Route::middleware('auth')->group(function ()
 {

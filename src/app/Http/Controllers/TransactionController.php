@@ -11,6 +11,9 @@ use App\Models\Item;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
 
 class TransactionController extends Controller
 {
@@ -39,13 +42,36 @@ class TransactionController extends Controller
             'brand' => $request->brand,
         ]);
         $item->categories()->attach($request->categories);
-        return redirect('/');
+
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        $product = \Stripe\Product::create([
+            'name' => $item->name,
+            'description' => $item->description,
+            //'images' => $image_name, // 画像URLを設定
+        ]);
+
+        $price = \Stripe\Price::create([
+            'product' => $product->id,
+            'unit_amount' => $item->price,
+            'currency' => 'jpy',
+        ]);
+
+        $item->update([
+            'stripe_item_id' => $product->id,
+            'stripe_price_id' => $price->id,
+        ]);
+        return redirect('/')->with('message', '出品が完了しました');
     }
 
     public function purchase($itemId)
     {
         $user = Auth::user();
         $item = Item::all()->find($itemId);
+
+        if ($item->is_sold) {
+            return redirect("/item/$itemId")->with('error', 'この商品はすでに購入されています');
+        }
+
         return view('order.purchase', compact('user', 'item'));
     }
 
@@ -70,21 +96,33 @@ class TransactionController extends Controller
     {
         $user = Auth::user();
         $item = Item::find($itemId);
-        Order::create([
-            'user_id' => $user->id,
-            'item_id' => $itemId,
-            'shipping_post_code' => session('shipping_post_code', $user->post_code),
-            'shipping_address' => session('shipping_address', $user->address),
-            'shipping_building' => session('shipping_building', $user->building),
-            'pay' => $request->pay,
-        ]);
-        $item->update(['is_sold' => true]);
+        Stripe::setApiKey(config('services.stripe.secret'));
 
-        session()->forget([
-            'shipping_post_code',
-            'shipping_address',
-            'shipping_building',
+        if($request->pay == 1) {
+            $payMethod = 'konbini';
+        } else {
+            $payMethod = 'card';
+        }
+
+        $checkout = Session::create([
+            'payment_method_types' => [$payMethod],
+            'line_items' => [[
+                'price' => $item->stripe_price_id,
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => url('/') . '?status=success',
+            'cancel_url' => 'https://example.com/cancel',
+            'metadata' => [
+                'user_id' => $user->id,
+                'item_id' => $itemId,
+                'shipping_post_code' => session('shipping_post_code', $user->post_code),
+                'shipping_address' => session('shipping_address', $user->address),
+                'shipping_building' => session('shipping_building', $user->building),
+                'pay' => $payMethod,
+
+            ],
         ]);
-        return redirect('/');
+        return redirect($checkout->url);
     }
 }

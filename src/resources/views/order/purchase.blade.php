@@ -23,8 +23,8 @@
                 <div class="purchase__select__inner">
                     <select name="pay" class="purchase__select" id="selectItem">
                         <option value="" hidden>選択してください</option>
-                        <option value="コンビニ支払い">コンビニ支払い</option>
-                        <option value="カード支払い">カード支払い</option>
+                        <option value="1">コンビニ支払い</option>
+                        <option value="2">カード支払い</option>
                     </select>
                     <p class="alert">
                         @error('pay')
