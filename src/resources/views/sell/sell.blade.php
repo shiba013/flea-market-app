@@ -40,8 +40,8 @@
 
                     <label for="post_code" class="sell-form__label">商品の状態</label>
                     <div class="sell-form__select-inner">
-                        <select name="condition_id" class="sell-form__select" id="condition">
-                            <option hidden>選択してください</option>
+                        <select name="condition_id" class="sell-form__select" >
+                            <option value="" hidden>選択してください</option>
                             @foreach($conditions as $condition)
                             <option value="{{ $condition->id }}" class="option" {{ old('condition_id')==$condition->id ? 'selected' : '' }}>{{ $condition->name }}</option>
                             @endforeach

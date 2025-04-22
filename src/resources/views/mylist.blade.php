@@ -6,6 +6,13 @@
 
 @section('content')
 <?php $tab = $tab ?? ''; ?>
+@if(session('message'))
+<div class="alert">
+    <p class="alert__session">
+        {{ session('message') }}
+    </p>
+</div>
+@endif
 <div class="content">
     <div class="top__title">
         <div class="title-list">

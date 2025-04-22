@@ -23,6 +23,8 @@ class CreateItemsTable extends Migration
             $table->string('image');
             $table->string('brand', 50)->nullable();
             $table->boolean('is_sold')->default(false);
+            $table->string('stripe_item_id')->nullable();
+            $table->string('stripe_price_id')->nullable();
             $table->timestamps();
         });
     }

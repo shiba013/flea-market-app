@@ -47,6 +47,11 @@
                     <form action="/purchase/{{ $item->id }}" method="get">
                         <input type="submit" value="購入手続きへ" class="order__btn">
                     </form>
+                    <p class="alert">
+                        @if(session('error'))
+                        {{ session('error') }}
+                        @endif
+                    </p>
                 </div>
             </section>
 
