@@ -24,6 +24,13 @@
         </div>
     </header>
 
+    @if(session('message'))
+    <div class="session">
+        <p class="session__message">
+            {{ session('message') }}
+        </p>
+    </div>
+    @endif
     <main class="login">
         <h2 class="login__title">ログイン</h2>
         <div class="login__inner">
