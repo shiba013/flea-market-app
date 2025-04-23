@@ -1,3 +1,15 @@
+.session {
+    padding: 20px 30px;
+    border: none;
+    background-color: rgba(255, 219, 252, 1);
+}
+
+.session__message {
+    color: rgba(95, 95, 95, 1);
+    font-weight: 600;
+    font-size: 20px;
+}
+
 .login {
     margin: 0;
 }

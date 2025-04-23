@@ -74,6 +74,8 @@ class MypageController extends Controller
             session()->flash('message', '支払いが完了しました。');
         }
 
+        session()->forget(['shipping_post_code', 'shipping_address', 'shipping_building']);
+
         return view('mylist', compact('tab', 'items'));
     }
 
@@ -88,6 +90,7 @@ class MypageController extends Controller
         $commented = Comment::where('item_id', $itemId)
         ->where('user_id', auth()->id())
         ->exists();
+
         return view('detail', compact('conditions', 'item', 'commented'));
     }
 
