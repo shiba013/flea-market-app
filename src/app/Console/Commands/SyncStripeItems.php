@@ -22,7 +22,7 @@ class SyncStripeItems extends Command
      *
      * @var string
      */
-    protected $description = 'LaravelのproductsとStripeの商品情報を同期する';
+    protected $description = 'LaravelのitemsとStripeの商品情報を同期する';
 
     /**
      * Create a new command instance.
@@ -41,24 +41,21 @@ class SyncStripeItems extends Command
      */
     public function handle()
     {
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe::setApiKey(config('services.stripe.secret'));
         $items = Item::whereNull('stripe_item_id')->get();
 
         foreach ($items as $item) {
-            // Stripeに商品を作成
             $stripeItem = StripeProduct::create([
                 'name' => $item->name,
                 'description' => $item->description ?? '',
             ]);
 
-            // Stripeに価格を作成（単位は「最小単位」＝円なら1円単位）
             $stripePrice = StripePrice::create([
                 'unit_amount' => $item->price,
                 'currency' => 'jpy',
                 'product' => $stripeItem->id,
             ]);
 
-            // 保存
             $item->update([
                 'stripe_item_id' => $stripeItem->id,
                 'stripe_price_id' => $stripePrice->id,

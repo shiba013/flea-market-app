@@ -3,11 +3,12 @@
 }
 
 .verify-email__title {
-    margin: 200px auto 80px;
+    margin: 200px auto 100px;
     text-align: center;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 28px;
     color: rgba(0, 0, 0, 1);
+    line-height: 2;
 }
 
 .verify-email__inner {
@@ -31,7 +32,7 @@
 }
 
 .verify-email-form__btn {
-    width: 250px;
+    width: 300px;
     height: 70px;
     border: 1px solid rgba(0, 0, 0, 1);
     border-radius: 10px;

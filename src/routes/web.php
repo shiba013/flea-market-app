@@ -6,6 +6,7 @@ use App\Http\Controllers\MypageController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\StripeWebhookController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +20,14 @@ use App\Http\Controllers\StripeWebhookController;
 
 Route::get('/register', [AuthController::class ,'register']);
 Route::post('/register', [AuthController::class ,'createUser']);
+
+Route::get('/email/verify', [AuthController::class ,'email'])
+->middleware(['auth']);
+Route::get('/email/verify/{id}/{hash}', [AuthController::class ,'verification'])
+->middleware(['auth', 'signed'])->name('verification.verify');
+Route::post('/email/verify/resend', [AuthController::class ,'resend'])
+->middleware(['auth', 'throttle:6,1']);
+
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginUser']);
 Route::get('/', [MypageController::class ,'home']);
@@ -26,7 +35,7 @@ Route::get('/item/{item_id}', [MypageController::class ,'showItem']);
 Route::get('/search', [MypageController::class, 'search']);
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle']);
 
-Route::middleware('auth')->group(function ()
+Route::middleware('auth', 'verified')->group(function ()
 {
     Route::get('/mypage', [MypageController::class ,'mypage']);
     Route::get('/mypage/profile', [AuthController::class, 'address']);
