@@ -29,6 +29,19 @@ DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
 ```
+
+> ユーザ登録時にメール認証が必要です。認証メールを受信するメールアドレスを設定してください。
+``` text
+MAIL_MAILER=(使用するメールドライバ)
+MAIL_HOST=(使用するサーバのホスト名)
+MAIL_PORT=(使用するサーバーのポート名)
+MAIL_USERNAME=(サーバにログインするためのユーザ名)
+MAIL_PASSWORD=(サーバにログインするためのパスワード)
+MAIL_ENCRYPTION=(メールの暗号化)
+MAIL_FROM_ADDRESS=(受信するメールアドレス)
+MAIL_FROM_NAME=(送信するメールの件名)
+```
+
 5. アプリケーションキーの作成
 ``` bash
 php artisan key:generate
@@ -93,9 +106,11 @@ stripe listen --forward-to http://localhost/stripe/webhook
 ```
 
 ## 使用技術(実行環境)
-- PHP8.3.0
-- Laravel8.83.29
-- MySQL8.0.26
+- PHP(8.3.0)
+- Laravel(8.83.29)
+- MySQL(8.0.26)
+- Fortify(1.19.1)
+- stripe(17.1.1)
 
 ## ER図
 
