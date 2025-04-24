@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class AuthController extends Controller
 {
@@ -24,12 +26,31 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
         Auth::login($user);
+        return redirect('/email/verify');
+    }
+
+    public function email(Request $request)
+    {
+        if (!$request->user()->hasVerifiedEmail()) {
+            $request->user()->sendEmailVerificationNotification();
+        }
+        return view('auth.verify-email');
+    }
+
+    public function verification(EmailVerificationRequest $request)
+    {
+        $request->fulfill();
         return redirect('/mypage/profile');
     }
 
-    public function email()
+    public function resend(Request $request)
     {
-        return view('auth.verify-email');
+        if ($request->user()->hasVerifiedEmail()) {
+            return redirect('/mypage/profile');
+        }
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('status', 'verification-link-sent');
     }
 
     public function address()

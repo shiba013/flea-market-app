@@ -43,7 +43,7 @@ class TransactionController extends Controller
         ]);
         $item->categories()->attach($request->categories);
 
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe::setApiKey(config('services.stripe.secret'));
         $product = \Stripe\Product::create([
             'name' => $item->name,
             'description' => $item->description,

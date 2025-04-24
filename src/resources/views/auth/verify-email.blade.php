@@ -30,13 +30,10 @@
         メール認証を完了してください。
         </h2>
         <div class="verify-email__inner">
-            <form action="" method="post" class="verify-email-form">
+            <form action="/email/verify/resend" method="post" class="verify-email-form">
                 @csrf
                 <div class="verify-email-form__group">
-                    <input type="submit" value="認証はこちらから" class="verify-email-form__btn">
-                </div>
-                <div class="verify-email-form__group">
-                    <a href="/verify-email" class="form__link">認証メールを再送する</a>
+                    <input type="submit" value="認証メールを再送する" class="verify-email-form__btn">
                 </div>
             </form>
         </div>
