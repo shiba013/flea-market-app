@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /storage/*.key
+!/src/storage/app/public/images/*.png
 /vendor
 .env
 .env.backup
@@ -13,3 +14,4 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/docker/mysql/data
