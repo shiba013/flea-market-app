@@ -13,7 +13,7 @@ use App\Models\User;
 
 class HelloTest extends TestCase
 {
-    use RefreshDatabase;
+    //use RefreshDatabase;
     /**
      * A basic feature test example.
      *
@@ -21,7 +21,7 @@ class HelloTest extends TestCase
      */
 
     //vendor/bin/phpunit tests/Feature/HelloTest.php
-/*
+
     public function testValue()
     {
         $this->assertTrue(true);
@@ -44,21 +44,9 @@ class HelloTest extends TestCase
         $response = $this->get('/no_route');
         $response->assertStatus(404);
     }
-*/
+
     public function testDatabase()
     {
-        Comment::factory()->create([
-            'item_id'=>1,
-            'user_id'=>1,
-            'comment'=>'commentTest12345',
-        ]);
-
-        $this->assertDatabaseHas('comments',[
-            'name'=>1,
-            'email'=>1,
-            'password'=>'commentTest12345',
-        ]);
-
         User::factory()->create([
             'name'=>'aaa',
             'email'=>'bbb@ccc.com',
