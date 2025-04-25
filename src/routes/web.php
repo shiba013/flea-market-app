@@ -22,11 +22,14 @@ Route::get('/register', [AuthController::class ,'register']);
 Route::post('/register', [AuthController::class ,'createUser']);
 
 Route::get('/email/verify', [AuthController::class ,'email'])
-->middleware(['auth']);
+->middleware(['auth'])->name('verification.notice');
 Route::get('/email/verify/{id}/{hash}', [AuthController::class ,'verification'])
 ->middleware(['auth', 'signed'])->name('verification.verify');
 Route::post('/email/verify/resend', [AuthController::class ,'resend'])
-->middleware(['auth', 'throttle:6,1']);
+->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::get('/mypage/profile', [AuthController::class, 'address'])->middleware(['verified']);
+Route::post('/mypage/profile', [AuthController::class, 'store'])->middleware(['verified']);
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginUser']);

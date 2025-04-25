@@ -11,6 +11,7 @@ use App\Models\Item;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
@@ -29,7 +30,16 @@ class TransactionController extends Controller
     {
         $user = Auth::user();
         $image = $request->file('image');
-        $image_name = $image->getClientOriginalName();
+        $originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+        $extension = $image->getClientOriginalExtension();
+        $image_name = $originalName . '.' . $extension;
+
+        $i = 1;
+        while (Storage::disk('public')->exists('images/' . $image_name)) {
+            $image_name = $originalName . '_' . $i . '.' . $extension;
+            $i++;
+        }
+
         $image->storeAs('images', $image_name, 'public');
 
         $item = Item::create([
@@ -47,7 +57,6 @@ class TransactionController extends Controller
         $product = \Stripe\Product::create([
             'name' => $item->name,
             'description' => $item->description,
-            //'images' => $image_name, // 画像URLを設定
         ]);
 
         $price = \Stripe\Price::create([
@@ -120,7 +129,6 @@ class TransactionController extends Controller
                 'shipping_address' => session('shipping_address', $user->address),
                 'shipping_building' => session('shipping_building', $user->building),
                 'pay' => $payMethod,
-
             ],
         ]);
         return redirect($checkout->url);
