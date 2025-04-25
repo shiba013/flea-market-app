@@ -2,7 +2,7 @@
 
 ## 環境構築
 **Dockerビルド**
-1. `git clone git@github.com:shiba013/flea-market-app.git
+1. git clone git@github.com:shiba013/flea-market-app.git
 2. cd flea-market-app
 3. DockerDesktopアプリを立ち上げる
 4. `docker-compose up -d --build`
