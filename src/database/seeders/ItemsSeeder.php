@@ -23,7 +23,7 @@ class ItemsSeeder extends Seeder
                 'name' => '腕時計',
                 'price' => 15000,
                 'description' => 'スタイリッシュなデザインのメンズ腕時計',
-                'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Armani+Mens+Clock.jpg',
+                'image' => 'Clock.jpg',
             ],
             [
                 'user_id' => 1,
@@ -31,7 +31,7 @@ class ItemsSeeder extends Seeder
                 'name' => 'HDD',
                 'price' => 5000,
                 'description' => '高速で信頼性の高いハードディスク',
-                'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/HDD+Hard+Disk.jpg',
+                'image' => 'Disk.jpg',
             ],
             [
                 'user_id' => 1,
@@ -39,7 +39,7 @@ class ItemsSeeder extends Seeder
                 'name' => '玉ねぎ3束',
                 'price' => 300,
                 'description' => '新鮮な玉ねぎ3束のセット',
-                'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/iLoveIMG+d.jpg',
+                'image' => 'Onions.jpg',
             ],
             [
                 'user_id' => 1,
@@ -47,7 +47,7 @@ class ItemsSeeder extends Seeder
                 'name' => '革靴',
                 'price' => 4000,
                 'description' => 'クラシックなデザインの革靴',
-                'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Leather+Shoes+Product+Photo.jpg',
+                'image' => 'Shoes.jpg',
             ],
             [
                 'user_id' => 1,
@@ -55,7 +55,7 @@ class ItemsSeeder extends Seeder
                 'name' => 'ノートPC',
                 'price' => 45000,
                 'description' => '高性能なノートパソコン',
-                'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Living+Room+Laptop.jpg',
+                'image' => 'Laptop.jpg',
             ],
             [
                 'user_id' => 1,
@@ -63,7 +63,7 @@ class ItemsSeeder extends Seeder
                 'name' => 'マイク',
                 'price' => 8000,
                 'description' => '高音質のレコーディング用マイク',
-                'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Music+Mic+4632231.jpg',
+                'image' => 'Mic.jpg',
             ],
             [
                 'user_id' => 1,
@@ -71,7 +71,7 @@ class ItemsSeeder extends Seeder
                 'name' => 'ショルダーバッグ',
                 'price' => 3500,
                 'description' => 'おしゃれなショルダーバッグ',
-                'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Purse+fashion+pocket.jpg',
+                'image' => 'Shoulder_bag.jpg',
             ],
             [
                 'user_id' => 1,
@@ -79,7 +79,7 @@ class ItemsSeeder extends Seeder
                 'name' => 'タンブラー',
                 'price' => 500,
                 'description' => '使いやすいタンブラー',
-                'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Tumbler+souvenir.jpg',
+                'image' => 'Tumbler.jpg',
             ],
             [
                 'user_id' => 1,
@@ -87,7 +87,7 @@ class ItemsSeeder extends Seeder
                 'name' => 'コーヒーミル',
                 'price' => 4000,
                 'description' => '手動のコーヒーミル',
-                'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Waitress+with+Coffee+Grinder.jpg',
+                'image' => 'Coffee_mill.jpg',
             ],
             [
                 'user_id' => 1,
@@ -95,27 +95,19 @@ class ItemsSeeder extends Seeder
                 'name'=> 'メイクセット',
                 'price' => 2500,
                 'description' => '便利なメイクアップセット',
-                'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/外出メイクアップセット.jpg',
+                'image' => 'Makeup_set.jpg',
             ],
         ];
 
         foreach ($items as $item) {
-            $url = $item['image'];
-            $file_name = basename(parse_url($url, PHP_URL_PATH));
-            $encoded_file_names = str_replace('+', '%2B', rawurlencode($file_name));
-            $encoded_file_name = rawurlencode($file_name);
-            $encoded_file_name = $encoded_file_names;
-            $encoded_url = str_replace($file_name, $encoded_file_name, $url);
-            $contents = Http::get($url)->body();
-            $path = Storage::disk('public')->put('images/' . $file_name, $contents);
-
+            // DBに挿入
             DB::table('items')->insert([
                 'user_id' => $item['user_id'],
                 'condition_id' => $item['condition_id'],
                 'name' => $item['name'],
                 'price' => $item['price'],
                 'description' => $item['description'],
-                'image' => 'storage/images/' . $file_name,
+                'image' => 'storage/images/' . $item['image'], // 画像のパス
             ]);
         }
     }
