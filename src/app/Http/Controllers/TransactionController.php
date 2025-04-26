@@ -12,7 +12,6 @@ use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 
@@ -113,24 +112,27 @@ class TransactionController extends Controller
             $payMethod = 'card';
         }
 
+        $metadata = [
+            'user_id' => $user->id,
+            'item_id' => $itemId,
+            'shipping_post_code' => session('shipping_post_code', $user->post_code),
+            'shipping_address' => session('shipping_address', $user->address),
+            'shipping_building' => session('shipping_building', $user->building),
+            'pay' => $payMethod,
+        ];
+
         $checkout = Session::create([
-            'payment_method_types' => [$payMethod],
-            'line_items' => [[
-                'price' => $item->stripe_price_id,
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => url('/') . '?status=success',
-            'cancel_url' => 'https://example.com/cancel',
-            'metadata' => [
-                'user_id' => $user->id,
-                'item_id' => $itemId,
-                'shipping_post_code' => session('shipping_post_code', $user->post_code),
-                'shipping_address' => session('shipping_address', $user->address),
-                'shipping_building' => session('shipping_building', $user->building),
-                'pay' => $payMethod,
-            ],
-        ]);
+                'payment_method_types' => [$payMethod],
+                'line_items' => [[
+                    'price' => $item->stripe_price_id,
+                    'quantity' => 1,
+                ]],
+                'mode' => 'payment',
+                'success_url' => url('/') . '?status=success',
+                'cancel_url' => url('/') . '?status=fail',
+                'metadata' => $metadata,
+            ]);
+
         return redirect($checkout->url);
     }
 }

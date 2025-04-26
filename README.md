@@ -97,12 +97,15 @@ stripe login
 ``` text
 STRIPE_SECRET_KEY=your_stripe_secret_key
 STRIPE_PUBLIC_KEY=your_stripe_public_key
-STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 ```
 
 6. Webhookイベントの転送設定
+> 下記のコマンドを実行した際に取得できるwebhookのシークレットキーを.env ファイルに設定を追加してください。
 ``` bash
 stripe listen --forward-to http://localhost/stripe/webhook
+```
+``` text
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 ```
 
 ## 使用技術(実行環境)

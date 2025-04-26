@@ -11,7 +11,7 @@ use App\Models\Like;
 use App\Models\Order;
 use App\Models\User;
 
-class HelloTest extends TestCase
+class RegisterTest extends TestCase
 {
     use RefreshDatabase;
     /**
@@ -20,7 +20,7 @@ class HelloTest extends TestCase
      * @return void
      */
 
-    //vendor/bin/phpunit tests/Feature/HelloTest.php
+    //vendor/bin/phpunit tests/Feature/RegisterTest.php
 
     // 名前が入力されていない場合
     public function test_name_is_required()
