@@ -71,7 +71,9 @@ class MypageController extends Controller
         }
 
         if ($request->query('status') == 'success') {
-            session()->flash('message', '支払いが完了しました。');
+            session()->flash('message', '支払いが完了しました');
+        } elseif($request->query('status') == 'fail') {
+            session()->flash('fail', '支払いができませんでした');
         }
 
         session()->forget(['shipping_post_code', 'shipping_address', 'shipping_building']);

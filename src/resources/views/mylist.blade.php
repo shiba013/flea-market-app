@@ -7,9 +7,16 @@
 @section('content')
 <?php $tab = $tab ?? ''; ?>
 @if(session('message'))
-<div class="alert">
+<div class="success">
     <p class="alert__session">
         {{ session('message') }}
+    </p>
+</div>
+@endif
+@if(session('fail'))
+<div class="fail">
+    <p class="alert__session">
+        {{ session('fail') }}
     </p>
 </div>
 @endif
