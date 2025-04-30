@@ -3,27 +3,20 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Models\Comment;
-use App\Models\Item;
-use App\Models\Like;
-use App\Models\Order;
 use App\Models\User;
 
 class RegisterTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic feature test example.
      *
      * @return void
      */
 
-    //vendor/bin/phpunit tests/Feature/RegisterTest.php
-
-    // 名前が入力されていない場合
-    public function test_name_is_required()
+    public function testNameIsRequired()
     {
         $response = $this->post('/register', [
             'name' => '',
@@ -37,8 +30,7 @@ class RegisterTest extends TestCase
         ]);
     }
 
-    // メールアドレスが入力されていない場合
-    public function test_email_is_required()
+    public function testEmailIsRequired()
     {
         $response = $this->post('/register', [
             'name' => 'テストユーザー',
@@ -52,8 +44,7 @@ class RegisterTest extends TestCase
         ]);
     }
 
-    // パスワードが入力されていない場合
-    public function test_password_is_required()
+    public function testPasswordIsRequired()
     {
         $response = $this->post('/register', [
             'name' => 'テストユーザー',
@@ -67,8 +58,7 @@ class RegisterTest extends TestCase
         ]);
     }
 
-    // パスワードが7文字以下の場合
-    public function test_password_must_be_at_least_8_characters()
+    public function testPasswordMustBeAtLeast8Characters()
     {
         $response = $this->post('/register', [
             'name' => 'テストユーザー',
@@ -82,8 +72,7 @@ class RegisterTest extends TestCase
         ]);
     }
 
-    // パスワード確認と一致しない場合
-    public function test_password_confirmation_must_match()
+    public function testPasswordConfirmationMustMatch()
     {
         $response = $this->post('/register', [
             'name' => 'テストユーザー',
@@ -97,8 +86,7 @@ class RegisterTest extends TestCase
         ]);
     }
 
-    // 正常登録時の挙動
-    public function test_successful_registration_redirects_to_login()
+    public function testSuccessfulRegistrationRedirectsToLogin()
     {
         $response = $this->post('/register', [
             'name' => 'テストユーザー',
@@ -111,7 +99,7 @@ class RegisterTest extends TestCase
             'email' => 'test@test.com',
         ]);
 
-        $response->assertRedirect('/email/verify'); // 遷移先に応じて調整
+        $response->assertRedirect('/email/verify');
     }
 
 }

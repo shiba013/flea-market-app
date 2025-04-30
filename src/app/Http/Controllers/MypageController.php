@@ -41,7 +41,7 @@ class MypageController extends Controller
         } else {
             $items = Item::with('likes')->get();
         }
-        return view('mylist', compact('tab', 'items'));
+        return view('my_list', compact('tab', 'items'));
     }
 
     public function introduction($itemId)
@@ -65,9 +65,12 @@ class MypageController extends Controller
         $tab = $request->query('tab');
 
         if ($tab == 'mylist') {
-            $items = $user->LikedItems()->with('likes')->get();
+            $items = $user->LikedItems()
+                ->with('likes')
+                ->where('items.user_id', '!=', $user->id)
+                ->get();
         } else {
-            $items = Item::with('likes')->get();
+            $items = Item::with('likes')->where('user_id', '!=', $user->id)->get();
         }
 
         if ($request->query('status') == 'success') {
@@ -78,7 +81,7 @@ class MypageController extends Controller
 
         session()->forget(['shipping_post_code', 'shipping_address', 'shipping_building']);
 
-        return view('mylist', compact('tab', 'items'));
+        return view('my_list', compact('tab', 'items'));
     }
 
     public function detail($itemId)
@@ -132,7 +135,7 @@ class MypageController extends Controller
             $items = Item::whereIn('id', Order::where('user_id', $user->id)->pluck('item_id'))
             ->where('is_sold', 1)->get();
         }
-        return view('mypage.mypage', compact('tab', 'items', 'user'));
+        return view('my_page.my_page', compact('tab', 'items', 'user'));
     }
 
     public function search(Request $request)
@@ -153,6 +156,6 @@ class MypageController extends Controller
             $items = Item::with('likes')
             ->KeywordSearch($request->keyword)->get();
         }
-        return view('mylist', compact('tab', 'items'));
+        return view('my_list', compact('tab', 'items'));
     }
 }

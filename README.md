@@ -62,11 +62,6 @@ php artisan db:seed
 php artisan storage:link
 ```
 
-10. stripeとの同期設定
-``` bash
-php artisan sync:stripe-items
-```
-
 **stripe環境構築**
 1. Stripeのアカウント作成
 > 公式サイトを参照してStripeのアカウント作成を作成してください。
@@ -108,6 +103,11 @@ stripe listen --forward-to http://localhost/stripe/webhook
 STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 ```
 
+7. laravelとstripeとの同期設定(商品登録)
+``` bash
+php artisan sync:stripe-items
+```
+
 ## 使用技術(実行環境)
 - PHP(8.3.0)
 - Laravel(8.83.29)
@@ -121,4 +121,3 @@ STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 ## URL
 - 開発環境：http://localhost/
 - phpMyAdmin:：http://localhost:8080/
-

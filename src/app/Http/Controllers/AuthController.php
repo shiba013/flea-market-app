@@ -40,13 +40,13 @@ class AuthController extends Controller
     public function verification(EmailVerificationRequest $request)
     {
         $request->fulfill();
-        return redirect('/mypage/profile');
+        return redirect('/my_page.profile');
     }
 
     public function resend(Request $request)
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect('/mypage/profile');
+            return redirect('/my_page.profile');
         }
         $request->user()->sendEmailVerificationNotification();
 
@@ -56,7 +56,7 @@ class AuthController extends Controller
     public function address()
     {
         $user = Auth::user();
-        return view('mypage.profile', compact('user'));
+        return view('my_page.profile', compact('user'));
     }
 
     public function store(ProfileRequest $request)
@@ -101,7 +101,7 @@ class AuthController extends Controller
             return redirect('/');
         }
         return back()->withErrors([
-            'email' => '認証情報と一致するレコードがありません。',
+            'email' => 'ログイン情報が登録されていません',
         ])->withInput();
     }
 
