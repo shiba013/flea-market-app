@@ -34,7 +34,7 @@ class ProfileRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'ユーザ名を入力してください',
+            'name.required' => 'お名前を入力してください',
             'post_code.required' => '郵便番号を入力してください',
             'post_code.regex' => 'ハイフン込みの8文字で入力してください',
             'address.required' => '住所を入力してください',
