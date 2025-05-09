@@ -116,7 +116,7 @@ php artisan sync:stripe-items
 - stripe(17.1.1)
 
 ## ER図
-
+![alt](er.png)
 
 ## URL
 - 開発環境：http://localhost/
