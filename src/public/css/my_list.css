@@ -1,0 +1,124 @@
+.success {
+    padding: 20px 30px;
+    border: none;
+    background-color: rgba(183, 250, 195, 1);
+}
+
+.fail {
+    padding: 20px 30px;
+    border: none;
+    background-color: rgba(255, 219, 252, 1);
+}
+
+.alert__session {
+    color: rgba(95, 95, 95, 1);
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.content {
+    margin: 0px auto;
+    max-width: 1540px;
+}
+
+.top__title {
+    width: 100%;
+    margin: 50px auto 0px;
+}
+
+.title-list {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    border-bottom: 2px solid rgba(95, 95, 95, 1);
+}
+
+input[type="radio"]#all:checked+label a,
+input[type="radio"]#my-list:checked+label a {
+    color: rgba(255, 0, 0, 1);
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(95, 95, 95, 1);
+}
+
+.title__name {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 2;
+    color: rgba(95, 95, 95, 1);
+}
+
+.title__name:first-of-type {
+    margin-left: 100px;
+}
+
+.items-list,
+.my-list {
+    margin: 0px auto;
+    padding: 50px;
+    max-width: 1540px;
+}
+
+.items-list__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.items-form {
+    width: 290px;
+    height: 320px;
+}
+
+.items__btn {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    position: relative;
+}
+
+.items__btn img {
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border: none;
+}
+
+.sold {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: 120px solid rgba(255, 0, 0, 1);
+    border-right: 120px solid transparent;
+    content: "";
+}
+
+.sold__label {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(-90%)rotate(-45deg);
+    padding: 10px;
+    z-index: 20;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    font-size: 30px;
+}
+
+.items__name {
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+    height: 30px;
+    font-weight: 400;
+    font-size: 25px;
+    background-color: rgba(255, 255, 255, 1);
+}

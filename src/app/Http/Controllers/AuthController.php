@@ -40,13 +40,13 @@ class AuthController extends Controller
     public function verification(EmailVerificationRequest $request)
     {
         $request->fulfill();
-        return redirect('/my_page.profile');
+        return redirect('/mypage/profile');
     }
 
     public function resend(Request $request)
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect('/my_page.profile');
+            return redirect('/mypage/profile');
         }
         $request->user()->sendEmailVerificationNotification();
 
