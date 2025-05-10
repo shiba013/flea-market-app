@@ -48,9 +48,10 @@ class ItemFactory extends Factory
         return $this->afterCreating(function (Item $item) {
             $categoryIds = Category::inRandomOrder()
                 ->limit(rand(1, 3))
-                ->pluck('id');
+                ->pluck('id')->toArray();
 
             $item->categories()->attach($categoryIds);
+            return $categoryIds;
         });
     }
 }
