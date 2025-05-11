@@ -23,8 +23,8 @@ class StripeWebhookController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => 'Invalid webhook'], 400);
         }
-
-        if ($event->type === 'checkout.session.completed') {
+        if ($event->type === 'checkout.session.completed')
+        {
             $session = $event->data->object;
 
             $itemId = $session->metadata->item_id ?? null;
@@ -58,7 +58,6 @@ class StripeWebhookController extends Controller
                 }
             }
         }
-
         return response()->json(['status' => 'received']);
     }
 }
