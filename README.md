@@ -64,7 +64,7 @@ php artisan storage:link
 
 **stripe環境構築**
 1. Stripeのアカウント作成
-> 公式サイトを参照してStripeのアカウント作成を作成してください。
+> 公式サイトを参照してStripeのアカウント作成を作成してください。  
 > 公式サイト：https://dashboard.stripe.com/
 
 2. stripe向けのパッケージのインストール
@@ -78,7 +78,7 @@ composer require stripe/stripe-php
 ```bash
 brew install stripe/stripe-cli/stripe   # homebrewを使用する場合
 ```
-> 他のOSの場合、公式サイトを参照してインストールしてください。
+> 他のOSの場合、公式サイトを参照してインストールしてください。  
 > 公式サイト：https://docs.stripe.com/stripe-cli
 
 4. Stripeにログイン
@@ -106,6 +106,58 @@ STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 7. laravelとstripeとの同期設定(商品登録)
 ``` bash
 php artisan sync:stripe-items
+```
+
+**単体テスト環境構築**
+1. `docker-compose exec php bash`
+2. `composer install`
+3. 「.env.example」ファイルを 「.env.testing」ファイルに命名を変更。または、新しく.envファイルを作成
+4. .envに以下の環境変数を追加
+``` text
+APP_ENV=test
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=demo_test
+DB_USERNAME=root
+DB_PASSWORD=root
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_PUBLIC_KEY=your_stripe_public_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+```
+
+5. アプリケーションキーの作成
+``` bash
+php artisan key:generate
+```
+
+6. 単体テストの実行
+``` bash
+php artisan test --filter テストファイル名
+```
+
+## 追加機能
+- 左上のCOACHTECHロゴをクリックすることでトップページへ遷移することができる。
+
+## 動作確認時の注意事項
+購入処理を行う際、テスト環境の仕様により、下記設定にて行うようにしてください。
+- コンビニ決済の場合
+``` text
+メールアドレス：succeed_immediately@test.com
+名前：任意の名前
+電話番号：22222222220
+```
+コンビニ決済の画面遷移後、PCの画面更新を実行することで支払い完了画面が表示されます。
+その後については、stripeの仕様により画面遷移できないため、http://localhost/ へ手動にて画面遷移してください。
+
+- カード決済の場合
+``` text
+メールアドレス：任意のメールアドレス
+カード番号：4242 4242 4242 4242
+カード有効期限：未来の年月
+セキュリティコード：任意の3桁の数字
+カード保有者の名前：任意の名前
+国または地域：任意の国名を選択
 ```
 
 ## 使用技術(実行環境)

@@ -6,7 +6,6 @@ use App\Http\Controllers\MypageController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\StripeWebhookController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,7 +37,7 @@ Route::get('/item/{item_id}', [MypageController::class ,'showItem']);
 Route::get('/search', [MypageController::class, 'search']);
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle']);
 
-Route::middleware('auth')->group(function ()
+Route::middleware('auth', 'verified')->group(function ()
 {
     Route::get('/mypage', [MypageController::class ,'mypage']);
     Route::get('/mypage/profile', [AuthController::class, 'address']);

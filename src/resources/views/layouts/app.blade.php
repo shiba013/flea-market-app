@@ -43,7 +43,7 @@
                             @endif
                         </li>
                         <li class="nav__items">
-                            <a href="/mypage" class="mypage__btn">マイページ</a>
+                            <a href="/mypage/?tab=sell" class="mypage__btn">マイページ</a>
                         </li>
                         <li class="nav__items">
                             <button type="submit" class="sell__btn">

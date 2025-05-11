@@ -82,7 +82,7 @@ class AuthController extends Controller
             Auth::logout();
             return redirect('/login');
         }
-        return redirect('/mypage');
+        return redirect('/mypage/?tab=sell');
     }
 
     public function login()
