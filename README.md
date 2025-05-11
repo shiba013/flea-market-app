@@ -136,7 +136,7 @@ php artisan key:generate
 php artisan test --filter テストファイル名
 ```
 
-## 動作確認
+## 動作確認時の注意事項
 左上のCOACHTECHロゴをクリックすることでトップページへ遷移することができる。
 
 > 購入処理を行う際、下記設定を参照して行うようにしてください。
