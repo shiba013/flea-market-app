@@ -43,7 +43,7 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=damikun150@gmail.com
 MAIL_FROM_NAME="My App Name"
 ```
-> 注意事項
+> 注意事項<br>
 > このメール認証では「ログインセッション」を使用します。<br>
 > 認証リンクをクリックする際は、必ず 「ログイン中の同じブラウザ」 でアクセスしてください。
 
