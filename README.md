@@ -30,41 +30,46 @@ DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
 ```
 
-> ユーザ登録時にメール認証が必要です。認証メールを受信するメールアドレスを設定してください。
+5. 認証メールアドレスの設定
+ユーザ登録時にメール認証が必要です。認証メールを受信するメールアドレスを設定してください。<br>
+(下記メールアドレスは、本プロジェクトでのみ使用可能です。)
 ``` text
-MAIL_MAILER=(使用するメールドライバ)
-MAIL_HOST=(使用するサーバのホスト名)
-MAIL_PORT=(使用するサーバーのポート名)
-MAIL_USERNAME=(サーバにログインするためのユーザ名)
-MAIL_PASSWORD=(サーバにログインするためのパスワード)
-MAIL_ENCRYPTION=(メールの暗号化)
-MAIL_FROM_ADDRESS=(受信するメールアドレス)
-MAIL_FROM_NAME=(送信するメールの件名)
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=damikun150@gmail.com
+MAIL_PASSWORD=vfusowrjenjpptvt
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=damikun150@gmail.com
+MAIL_FROM_NAME="My App Name"
 ```
+> 注意事項
+> このメール認証では「ログインセッション」を使用します。<br>
+> 認証リンクをクリックする際は、必ず 「ログイン中の同じブラウザ」 でアクセスしてください。
 
-5. アプリケーションキーの作成
+6. アプリケーションキーの作成
 ``` bash
 php artisan key:generate
 ```
 
-6. マイグレーションの実行
+7. マイグレーションの実行
 ``` bash
 php artisan migrate
 ```
 
-7. シーディングの実行
+8. シーディングの実行
 ``` bash
 php artisan db:seed
 ```
 
-8. 画像表示のためのシンボリックリンクの設定
+9. 画像表示のためのシンボリックリンクの設定
 ``` bash
 php artisan storage:link
 ```
 
 **stripe環境構築**
 1. Stripeのアカウント作成
-> 公式サイトを参照してStripeのアカウント作成を作成してください。  
+> 公式サイトを参照してStripeのアカウント作成を作成してください。<br>
 > 公式サイト：https://dashboard.stripe.com/
 
 2. stripe向けのパッケージのインストール
@@ -78,7 +83,7 @@ composer require stripe/stripe-php
 ```bash
 brew install stripe/stripe-cli/stripe   # homebrewを使用する場合
 ```
-> 他のOSの場合、公式サイトを参照してインストールしてください。  
+> 他のOSの場合、公式サイトを参照してインストールしてください。<br>
 > 公式サイト：https://docs.stripe.com/stripe-cli
 
 4. Stripeにログイン
@@ -105,6 +110,7 @@ STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 
 7. laravelとstripeとの同期設定(商品登録)
 ``` bash
+docker-compose exec php bash
 php artisan sync:stripe-items
 ```
 
@@ -146,7 +152,7 @@ php artisan test --filter テストファイル名
 名前：任意の名前
 電話番号：22222222220
 ```
-コンビニ決済の画面遷移後、PCの画面更新を実行することで支払い完了画面が表示されます。  
+コンビニ決済の画面遷移後、PCの画面更新を実行することで支払い完了画面が表示されます。<br>
 その後については、stripeの仕様により画面遷移できないため、http://localhost/ へ手動にて画面遷移してください。
 
 - カード決済の場合

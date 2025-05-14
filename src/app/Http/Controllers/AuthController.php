@@ -25,16 +25,15 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+        $user->sendEmailVerificationNotification();
         Auth::login($user);
         return redirect('/email/verify');
     }
 
     public function email(Request $request)
     {
-        if (!$request->user()->hasVerifiedEmail()) {
-            $request->user()->sendEmailVerificationNotification();
-        }
-        return view('auth.verify-email');
+        $user = Auth::user();
+        return view('auth.verify-email', compact('user'));
     }
 
     public function verification(EmailVerificationRequest $request)
