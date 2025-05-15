@@ -38,7 +38,8 @@
                 @csrf
                 <div class="login-form__group">
                     <label for="email" class="login-form__label">メールアドレス</label>
-                    <input type="text" name="email" id="email" class="login-form__input">
+                    <input type="text" name="email" id="email" class="login-form__input"
+                    value="{{ old('email') }}">
                     <p class="alert">
                         @error('email')
                         {{ $message }}
@@ -47,7 +48,8 @@
                 </div>
                 <div class="login-form__group">
                     <label for="password" class="login-form__label">パスワード</label>
-                    <input type="password" name="password" id="password" class="login-form__input">
+                    <input type="password" name="password" id="password" class="login-form__input"
+                    value="{{ old('password') }}">
                     <p class="alert">
                         @error('password')
                         {{ $message }}
