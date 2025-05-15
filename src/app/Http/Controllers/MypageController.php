@@ -148,9 +148,6 @@ class MypageController extends Controller
                 $likedItemIds = Like::where('user_id', Auth::id())->pluck('item_id');
                 $items = Item::whereIn('id', $likedItemIds)->with('likes')
                 ->KeywordSearch($request->keyword)->get();
-            } else {
-                $items = $user->LikedItems()->with('likes')
-                ->KeywordSearch($request->keyword)->get();
             }
         } else {
             $items = Item::with('likes')

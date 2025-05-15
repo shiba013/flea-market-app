@@ -12,7 +12,7 @@
             @csrf
             <section class="address-form__group">
                 <label for="shipping_post_code" class="address-form__label">郵便番号</label>
-                <input type="text" name="shipping_post_code" id="shipping_post_code" class="address-form__input">
+                <input type="text" name="shipping_post_code" id="shipping_post_code" class="address-form__input" value="{{ old('shipping_post_code') }}">
                 <p class="alert">
                     @error('shipping_post_code')
                     {{ $message }}
@@ -21,7 +21,7 @@
             </section>
             <section class="address-form__group">
                 <label for="shipping_address" class="address-form__label">住所</label>
-                <input type="text" name="shipping_address" id="shipping_address" class="address-form__input">
+                <input type="text" name="shipping_address" id="shipping_address" class="address-form__input" value="{{ old('shipping_address') }}">
                 <p class="alert">
                     @error('shipping_address')
                     {{ $message }}
@@ -30,7 +30,7 @@
             </section>
             <section class="address-form__group">
                 <label for="shipping_building" class="address-form__label">建物名</label>
-                <input type="text" name="shipping_building" id="shipping_building" class="address-form__input">
+                <input type="text" name="shipping_building" id="shipping_building" class="address-form__input" class="{{ old('shipping_building') }}">
                 <p class="alert">
                     @error('shipping_building')
                     {{ $message }}

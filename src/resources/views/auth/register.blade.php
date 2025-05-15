@@ -31,7 +31,8 @@
                 @csrf
                 <div class="register-form__group">
                     <label for="name" class="register-form__label">ユーザ名</label>
-                    <input type="text" name="name" id="name" class="register-form__input">
+                    <input type="text" name="name" id="name" class="register-form__input"
+                    value="{{ old('name') }}">
                     <p class="alert">
                         @error('name')
                         {{ $message }}
@@ -40,7 +41,8 @@
                 </div>
                 <div class="register-form__group">
                     <label for="email" class="register-form__label">メールアドレス</label>
-                    <input type="text" name="email" id="email" class="register-form__input">
+                    <input type="text" name="email" id="email" class="register-form__input"
+                    value="{{ old('email') }}">
                     <p class="alert">
                         @error('email')
                         {{ $message }}
@@ -49,7 +51,8 @@
                 </div>
                 <div class="register-form__group">
                     <label for="password" class="register-form__label">パスワード</label>
-                    <input type="password" name="password" id="password" class="register-form__input">
+                    <input type="password" name="password" id="password" class="register-form__input"
+                    value="{{ old('password') }}">
                     <p class="alert">
                         @error('password')
                         {{ $message }}
@@ -58,7 +61,7 @@
                 </div>
                 <div class="register-form__group">
                     <label for="password_confirmation" class="register-form__label">確認用パスワード</label>
-                    <input type="password" name="password_confirmation" id="password_confirmation" class="register-form__input">
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="register-form__input" value="{{ old('password_confirmation') }}">
                     <p class="alert">
                         @error('password_confirmation')
                         {{ $message }}

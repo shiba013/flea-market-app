@@ -51,19 +51,24 @@ MAIL_FROM_NAME="My App Name"
 php artisan key:generate
 ```
 
-7. マイグレーションの実行
+7. 画像表示のためのシンボリックリンクの設定
+``` bash
+php artisan storage:link
+```
+
+8. マイグレーションの実行
 ``` bash
 php artisan migrate
 ```
 
-8. シーディングの実行
+9. シーディングの実行
 ``` bash
 php artisan db:seed
 ```
 
-9. 画像表示のためのシンボリックリンクの設定
+10. laravelとstripeとの同期設定(商品登録)
 ``` bash
-php artisan storage:link
+php artisan sync:stripe-items
 ```
 
 **stripe環境構築**
@@ -105,12 +110,6 @@ stripe listen --forward-to http://localhost/stripe/webhook
 ```
 ``` text
 STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
-```
-
-7. laravelとstripeとの同期設定(商品登録)
-``` bash
-docker-compose exec php bash
-php artisan sync:stripe-items
 ```
 
 **単体テスト環境構築**
