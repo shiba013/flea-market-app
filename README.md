@@ -111,7 +111,8 @@ stripe listen --forward-to http://localhost/stripe/webhook
 ``` text
 STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 ```
-> コマンド実行後、購入処理を完了させる際に必要なため、終了しないようにしてください。
+> コマンドを実行する際、stripeにログインした状態で行ってください。<br>
+> また、コマンド実行後、購入処理を完了させる際に必要なため終了しないようにしてください。
 
 **単体テスト環境構築**
 1. `docker-compose exec php bash`
