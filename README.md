@@ -104,13 +104,14 @@ STRIPE_PUBLIC_KEY=your_stripe_public_key
 ```
 
 6. Webhookイベントの転送設定
-> 下記のコマンドを実行した際に取得できるwebhookのシークレットキーを.env ファイルに設定を追加してください。
+下記のコマンドを実行した際に取得できるwebhookのシークレットキーを.env ファイルに設定を追加してください。
 ``` bash
 stripe listen --forward-to http://localhost/stripe/webhook
 ```
 ``` text
 STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 ```
+> コマンド実行後、購入処理を完了させる際に必要なため、終了しないようにしてください。
 
 **単体テスト環境構築**
 1. `docker-compose exec php bash`
