@@ -70,6 +70,8 @@ php artisan db:seed
 ``` bash
 php artisan sync:stripe-items
 ```
+> stripeとの同期設定を行う際、stripeの環境構築の環境変数の設定まで<br>
+> 完了した状態で実行してください。
 
 **stripe環境構築**
 1. Stripeのアカウント作成
@@ -90,17 +92,17 @@ brew install stripe/stripe-cli/stripe   # homebrewを使用する場合
 > 他のOSの場合、公式サイトを参照してインストールしてください。<br>
 > 公式サイト：https://docs.stripe.com/stripe-cli
 
-4. Stripeにログイン
-Laravel プロジェクトのルートディレクトリで実行
-``` bash
-stripe login
-```
-
-5. 環境変数の設定
+4. 環境変数の設定
 > .env ファイルに以下の設定を追加してください。必要な情報はStripeダッシュボードから取得できます。
 ``` text
 STRIPE_SECRET_KEY=your_stripe_secret_key
 STRIPE_PUBLIC_KEY=your_stripe_public_key
+```
+
+5. Stripeにログイン
+Laravel プロジェクトのルートディレクトリで実行
+``` bash
+stripe login
 ```
 
 6. Webhookイベントの転送設定
@@ -143,7 +145,7 @@ php artisan test --filter テストファイル名
 ```
 
 ## 動作確認時の注意事項
-左上のCOACHTECHロゴをクリックすることでトップページへ遷移することができる。
+左上のCOACHTECHロゴをクリックすることでトップページへ遷移することができます。
 
 > 購入処理を行う際、下記設定を参照して行うようにしてください。
 - コンビニ決済の場合
