@@ -83,7 +83,7 @@ composer require stripe/stripe-php
 ```
 
 3. Stripe CLIのインストール
-> StripeのCLIツールをインストールする必要があります。以下のコマンドを実行してインストールしてください。
+StripeのCLIツールをインストールする必要があります。以下のコマンドを実行してインストールしてください。
 ```bash
 brew install stripe/stripe-cli/stripe   # homebrewを使用する場合
 ```
@@ -91,7 +91,7 @@ brew install stripe/stripe-cli/stripe   # homebrewを使用する場合
 > 公式サイト：https://docs.stripe.com/stripe-cli
 
 4. Stripeにログイン
-> Laravel プロジェクトのルートディレクトリで実行
+Laravel プロジェクトのルートディレクトリで実行
 ``` bash
 stripe login
 ```
