@@ -37,10 +37,10 @@ DB_PASSWORD=laravel_pass
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.gmail.com
 MAIL_PORT=587
-MAIL_USERNAME=damikun150@gmail.com
-MAIL_PASSWORD=vfusowrjenjpptvt
+MAIL_USERNAME=gmail@gmail.com
+MAIL_PASSWORD=
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=damikun150@gmail.com
+MAIL_FROM_ADDRESS=gmail@gmail.com
 MAIL_FROM_NAME="My App Name"
 ```
 > このメール認証では「ログインセッション」を使用します。<br>
