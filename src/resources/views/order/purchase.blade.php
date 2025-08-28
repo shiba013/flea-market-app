@@ -6,8 +6,7 @@
 
 @section('content')
 <div class="purchase">
-    <form action="/purchase/{{ $item->id }}" method="post" class="purchase__inner">
-        @csrf
+    <div class="purchase__inner">
         <div class="wrap">
             <section class="purchase__group">
                 <div class="purchase__group__inner">
@@ -73,9 +72,10 @@
             </script>
 
             <section class="purchase__items">
-                <input type="submit" value="購入する" class="purchase__items-btn">
+                <a href="{{ route('pay', ['item_id' => $item->id]) }}" class="purchase__items-btn" data-id="{{ $item->id }}">購入する</a>
             </section>
         </div>
-    </form>
+    </div>
 </div>
+<script src="{{ asset('js/payment.js') }}"></script>
 @endsection

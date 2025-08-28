@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\PurchaseRequest;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\ExhibitionRequest;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
+use Stripe\PaymentIntent;
 
 class TransactionController extends Controller
 {
@@ -104,20 +106,16 @@ class TransactionController extends Controller
     {
         $user = Auth::user();
         $item = Item::find($itemId);
-        Stripe::setApiKey(config('services.stripe.secret'));
+        Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        if($request->pay == 1) {
-            $payMethod = 'konbini';
-        } else {
-            $payMethod = 'card';
-        }
+        $payMethod = $request->input('pay') == 1 ? 'konbini' : 'card';
 
         $metadata = [
             'user_id' => $user->id,
             'item_id' => $itemId,
-            'shipping_post_code' => session('shipping_post_code', $user->post_code),
-            'shipping_address' => session('shipping_address', $user->address),
-            'shipping_building' => session('shipping_building', $user->building),
+            'shipping_post_code' => session('shipping_post_code') ?? $user->post_code,
+            'shipping_address' => session('shipping_address') ?? $user->address,
+            'shipping_building' => session('shipping_building') ?? $user->building,
             'pay' => $payMethod,
         ];
 
@@ -128,11 +126,45 @@ class TransactionController extends Controller
                     'quantity' => 1,
                 ]],
                 'mode' => 'payment',
-                'success_url' => url('/') . '?status=success',
-                'cancel_url' => url('/') . '?status=fail',
-                'metadata' => $metadata,
+                'success_url' => route('success', ['item_id' => $itemId]) . '?session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => route('fail', ['item_id' => $itemId]),
+                'payment_intent_data' => [
+                    'metadata' => $metadata,
+                ],
+            ]);
+        return redirect($checkout->url);
+    }
+
+    public function success(Request $request, $itemId)
+    {
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        $item = Item::find($itemId);
+        $sessionId = $request->get('session_id');
+        $checkoutSession = Session::retrieve($sessionId);
+        $paymentIntent = PaymentIntent::retrieve($checkoutSession->payment_intent);
+        $metadata = $paymentIntent->metadata;
+        $pay = $metadata->pay === 'konbini' ? 1 : 2;
+
+        if (!$item->is_sold) {
+            $order = Order::create([
+                'user_id' => $metadata->user_id,
+                'item_id' => $metadata->item_id,
+                'shipping_post_code' => $metadata->shipping_post_code,
+                'shipping_address' => $metadata->shipping_address,
+                'shipping_building' => $metadata->shipping_building,
+                'pay' => $pay,
             ]);
 
-        return redirect($checkout->url);
+            if ($order) {
+                $item->is_sold = true;
+                $item->save();
+            }
+        }
+        return redirect('/')->with('message', '商品を購入しました');
+    }
+
+    public function fail($itemId)
+    {
+        return redirect('/')->with('fail', '商品を購入できませんでした');
     }
 }
